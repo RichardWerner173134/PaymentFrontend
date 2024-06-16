@@ -1,0 +1,31 @@
+.user-item{
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #d4c8c8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+  
+.user-firstname {
+    font-weight: bold;
+    color: #333;
+    font-size: larger;
+    padding-right: 5px;
+}
+
+.user-lastname {
+    font-weight: bold;
+    color: #333;
+    font-size: larger;
+    padding-right: 5px;
+}
+
+.user-id {
+    font-weight: bold;
+    color: #000000;
+    font-size: larger;
+}
+
+.user-item:hover {
+    background-color: #e0e0e0;
+}

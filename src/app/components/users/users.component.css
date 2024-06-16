@@ -1,0 +1,16 @@
+.search {
+    margin: 10px;
+    height: 1cm;
+}
+
+.users-list {
+    list-style: none;
+    padding: 0;
+}
+
+.searchbtn{
+    font-weight: bold;
+    font-size: larger;
+    height: 1cm;
+}
+
