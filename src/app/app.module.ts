@@ -10,11 +10,12 @@ import { ImpressumComponent } from "./shared/impressum/impressum.component";
 import { PaymentsComponent } from "./components/payments/payments.component";
 import { LoginComponent } from "./components/login/login.component";
 import { StoreModule } from '@ngrx/store';
-import { usersReducer } from "./state/reducer/app.reducer";
+import { apiReducer } from "./state/reducer/app.reducer";
 import { CommonModule, NgFor } from "@angular/common";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UsersComponent } from "./components/users/users.component";
 import { UserCardComponent } from "./components/users/user-card/user-card.component";
+import { PaymentCardComponent } from "./components/payments/payment-card/payment-card.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -36,7 +37,7 @@ const routes: Routes = [
         HttpClientModule,
         NavbarComponent,
         FooterComponent,
-        StoreModule.forRoot({ appState: usersReducer }),
+        StoreModule.forRoot({ appState: apiReducer }),
         NgFor,
         CommonModule,
         HttpClientModule,

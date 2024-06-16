@@ -1,1 +1,3 @@
-<p>payments works!</p>
+<app-payment-card
+    *ngFor="let payment of payments$ | async"
+    [payment]="payment"></app-payment-card>

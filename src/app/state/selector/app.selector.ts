@@ -1,14 +1,16 @@
 import { createFeatureSelector, createSelector, select } from "@ngrx/store";
 import { AppState } from "../app.state";
 
-export const selectAppState = createFeatureSelector<AppState>('appState');
+const NAME_OF_APP_STATE_STORE = 'appState';
+
+export const selectAppState = createFeatureSelector<AppState>(NAME_OF_APP_STATE_STORE);
 
 export const usersSelector = createSelector(
     selectAppState,
     (state: AppState) => state.users
 );
 
-export const someStringsSelector = createSelector(
+export const paymentsSelector = createSelector(
     selectAppState,
-    (state: AppState) => state.someStrings
+    (state: AppState) => state.payments
 );

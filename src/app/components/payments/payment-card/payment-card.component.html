@@ -1,0 +1,7 @@
+<div class="payment-card-container">
+    <p>{{ payment.paymentDate }}</p>
+    <p>Creditor: {{ payment.creditor }}</p>
+    <p>{{ payment.price }}€</p>
+    <p>Debitoren: {{ payment.debitors.join(", ")}}</p>
+    <p>Price per Person: {{ getPricePerPerson() }}€</p>
+</div>

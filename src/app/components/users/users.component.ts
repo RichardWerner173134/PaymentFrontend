@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../../model/user';
+import { User } from '../../model/internal/User';
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { usersSelector } from '../../state/selector/app.selector';
-import { GetUsersResponse } from '../../model/GetUsersResponse';
+import { GetUsersResponse } from '../../model/backend/GetUsersResponse';
 import { fetchUsersSuccess } from '../../state/action/app.action';
 import { UserCardComponent } from './user-card/user-card.component';
 import { CommonModule, NgFor } from '@angular/common';

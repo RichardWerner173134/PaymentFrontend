@@ -1,22 +1,24 @@
 import { createReducer, on } from "@ngrx/store";
 import { AppState } from "../app.state";
-import { fetchUsersSuccess, setSomeString } from "../action/app.action";
+import { fetchPaymentsSuccess, fetchUsersSuccess } from "../action/app.action";
 
 export const initialState: AppState = {
     users:[],
-    someStrings: []
+    payments: []
 }
 
-export const usersReducer = createReducer(
+export const apiReducer = createReducer(
     initialState,
+    
     on(fetchUsersSuccess, (state, action) => ({
         ...state,
         users: action.users
     })),
 
-    on(setSomeString, (state, action) => ({
+    
+    on(fetchPaymentsSuccess, (state, action) => ({
         ...state,
-        someStrings: [...state.someStrings, action.someString]
+        payments: action.payments
     }))
 );
 

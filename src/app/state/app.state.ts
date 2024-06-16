@@ -1,6 +1,7 @@
-import { User } from "../model/user";
+import { Payment } from "../model/internal/Payment";
+import { User } from "../model/internal/User";
 
 export interface AppState {
     users: User[];
-    someStrings: string[];
+    payments: Payment[];
 }
