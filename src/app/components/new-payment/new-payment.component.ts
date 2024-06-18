@@ -48,11 +48,13 @@ export class NewPaymentComponent implements OnInit {
   onSubmit(){
     let url = "http://localhost:7066/api/payments";
 
+    console.log(this.mapDebitors(this.paymentForm.value.debitors));
+
     let body: PostPaymentRequest = {
       payment: {
         author: this.paymentForm.value.author,
         creditor: this.paymentForm.value.creditor,
-        debitors: [this.paymentForm.value.debitors.value],
+        debitors: this.mapDebitors(this.paymentForm.value.debitors),
         paymentDate: this.paymentForm.value.paymentDate,
         paymentDescription: this.paymentForm.value.description,
         price: this.paymentForm.value.price
@@ -68,4 +70,12 @@ export class NewPaymentComponent implements OnInit {
     });
   }
 
+  mapDebitors(arg: any[]): string[] {
+    let result: string[] = [];
+    arg.forEach(element => {
+      result.push(element.debitor);
+    });
+
+    return result;
+  }
 }
