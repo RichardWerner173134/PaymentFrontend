@@ -1,5 +1,4 @@
 import { Component, Input, input } from '@angular/core';
-import { Payment } from '../../../model/internal/Payment';
 
 @Component({
   selector: 'app-payment-card',
@@ -10,9 +9,30 @@ import { Payment } from '../../../model/internal/Payment';
 })
 export class PaymentCardComponent {
   @Input()
-  payment!: Payment;
+  paymentId!: number;
 
+  @Input()
+  paymentDescription!: string;
+  
+  @Input()
+  paymentDate!: Date;
+  
+  @Input()
+  price!: number;
+  
+  @Input()
+  debitors!: string[];
+  
+  @Input()
+  creditor!: string;
+  
+  @Input()
+  author!: string;
+
+  @Input()
+  updateTime!: Date;
+  
   getPricePerPerson() {
-    return (this.payment.price / this.payment.debitors.length).toFixed(2);
+    return (this.price / this.debitors.length).toFixed(2);
   }
 }

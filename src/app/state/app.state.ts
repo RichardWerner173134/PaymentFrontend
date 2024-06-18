@@ -1,5 +1,4 @@
-import { Payment } from "../model/internal/Payment";
-import { User } from "../model/internal/User";
+import { User, Payment } from "../model/backend/InternalSwagger";
 
 export interface AppState {
     users: User[];

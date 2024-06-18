@@ -1,0 +1,47 @@
+<div class="new-payment-container">
+    <p>Here you can create a new Payment</p>
+    
+    <form class="post-payment-form" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+
+        <div class="field">
+            <label class="label">Author</label>
+            <input type="text" class="input" formControlName="author">
+        </div>
+        <div class="field">
+            <label class="label">Creditor</label>
+            <input type="text" class="input" formControlName="creditor">
+        </div>
+        <div class="field">
+            <label class="label">Description</label>
+            <input type="text" class="input" formControlName="description">
+        </div>
+        <div class="field">
+            <label class="label">Date of Payment</label>
+            <input type="date" class="input" formControlName="paymentDate">
+        </div>
+        <div class="field">
+            <label class="label">Price</label>
+            <input type="number" class="input" formControlName="price">
+        </div>
+        <!--<div formArrayName="debitors">
+            <ng-container *ngFor="let debitor of paymentForm.value.debitors; let i = index">
+                <input type="text" [formGroup]="debitor" />
+            </ng-container>
+        </div>-->
+
+        
+        <div formArrayName="debitors">
+            <label>Debitors</label>
+            <div *ngFor="let debitor of debitors.controls; let i = index" [formGroupName]="i">
+              <input formControlName="debitor" type="text">
+            </div>
+        </div>
+
+        <button type="button" class="btn-add-debitor" (click)="addDebitor()">Add Debitor</button>
+        <div>
+            <button type="submit" class="button">Create Payment</button>
+        </div>
+
+        {{ paymentForm.value | json }}
+    </form>
+</div>

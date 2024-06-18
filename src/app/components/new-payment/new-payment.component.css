@@ -1,0 +1,61 @@
+.new-payment-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-payment-form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    background-color: white;
+    border: 8px solid rgb(25, 9, 83);
+    padding: 10px;
+}
+
+
+.field {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: center
+}
+
+label {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 18px;
+    color: #333;
+    height: 20px;
+    width: 200px;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: right;
+    clear: both;
+}
+
+input {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    height: 20px;
+    width: 300px;
+    border: 1px solid #000;
+    margin-top: 10px;
+    float: left;
+}
+
+button {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    height: 50px;
+    width: 100%;
+    border: 1px solid #000;
+    margin-top: 10px;
+    transition-duration: 0.4s;
+    background-color: rgb(128, 114, 175); /* Green */
+    color: rgb(25, 9, 83);
+}
+  
+button:hover {
+    background-color: rgb(25, 9, 83);; /* Green */
+    color: white; 
+}

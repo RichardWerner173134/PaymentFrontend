@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Payment } from '../../model/internal/Payment';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { paymentsSelector } from '../../state/selector/app.selector';
-import { GetPaymentsResponse } from '../../model/backend/GetPaymentsResponse';
 import { fetchPaymentsSuccess } from '../../state/action/app.action';
 import { CommonModule } from '@angular/common';
 import { PaymentCardComponent } from './payment-card/payment-card.component';
+import { GetPaymentsResponse, Payment } from '../../model/backend/InternalSwagger';
 
 @Component({
   selector: 'app-payments',

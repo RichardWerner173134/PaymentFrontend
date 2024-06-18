@@ -1,7 +1,6 @@
 import { createAction, props } from "@ngrx/store";
-import { User } from "../../model/internal/User";
-import { Payment } from "../../model/internal/Payment";
+import { Payment, User } from "../../model/backend/InternalSwagger";
 
 export const fetchUsersSuccess = createAction('[User] Set Users', props<{users: User[]}>());
 
-export const fetchPaymentsSuccess = createAction('[Payments] Set Users', props<{payments: Payment[]}>());
+export const fetchPaymentsSuccess = createAction('[Payment] Set Payments', props<{payments: Payment[]}>());

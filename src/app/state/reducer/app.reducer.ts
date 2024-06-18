@@ -3,7 +3,7 @@ import { AppState } from "../app.state";
 import { fetchPaymentsSuccess, fetchUsersSuccess } from "../action/app.action";
 
 export const initialState: AppState = {
-    users:[],
+    users: [],
     payments: []
 }
 

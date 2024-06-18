@@ -14,8 +14,8 @@ import { apiReducer } from "./state/reducer/app.reducer";
 import { CommonModule, NgFor } from "@angular/common";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UsersComponent } from "./components/users/users.component";
-import { UserCardComponent } from "./components/users/user-card/user-card.component";
-import { PaymentCardComponent } from "./components/payments/payment-card/payment-card.component";
+import { NewPaymentComponent } from "./components/new-payment/new-payment.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -23,6 +23,7 @@ const routes: Routes = [
     { path: 'impressum', component: ImpressumComponent },
     { path: 'payments', component: PaymentsComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'new-payment-container', component: NewPaymentComponent },
     { path: '**', component: HomeComponent }
 ];
 
@@ -40,6 +41,7 @@ const routes: Routes = [
         StoreModule.forRoot({ appState: apiReducer }),
         NgFor,
         CommonModule,
+        ReactiveFormsModule, 
         HttpClientModule,
         StoreDevtoolsModule.instrument({
             maxAge: 25, // Retains last 25 states
