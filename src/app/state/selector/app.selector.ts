@@ -5,6 +5,9 @@ const NAME_OF_APP_STATE_STORE = 'appState';
 
 export const selectAppState = createFeatureSelector<AppState>(NAME_OF_APP_STATE_STORE);
 
+/*
+    users
+*/
 export const usersSelector = createSelector(
     selectAppState,
     (state: AppState) => state.users

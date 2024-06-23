@@ -1,13 +1,12 @@
 <div>
-    <input class="search" type="text" placeholder="Search for users">
-    <button class="searchbtn" (click)="search()">Go</button>
+    <input class="search" type="text" placeholder="Search for users" (keyup.enter)="search($event)">
     <ul class="users-list">
         <app-user-card 
             *ngFor="let user of users$ | async"
             [firstName]="user.firstName" 
             [lastName]="user.lastName"
             [id]="user.id"
-            [email]="user.email">
+            [username]="user.username">
         </app-user-card>
     </ul>
 </div>

@@ -4,23 +4,17 @@
     border-radius: 8px;
     background-color: #d4c8c8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
 }
-  
-.user-firstname {
-    font-weight: bold;
+
+.user-last-first-name {
+    font-weight: normal;
     color: #333;
     font-size: larger;
     padding-right: 5px;
 }
 
-.user-lastname {
-    font-weight: bold;
-    color: #333;
-    font-size: larger;
-    padding-right: 5px;
-}
-
-.user-id {
+.user-name {
     font-weight: bold;
     color: #000000;
     font-size: larger;

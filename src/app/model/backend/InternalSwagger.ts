@@ -30,7 +30,7 @@ export interface PostPaymentRequest {
 
 export interface User {
     id: number;
-    email: string;
+    username: string;
     firstName: string;
     lastName: string;
 
@@ -59,8 +59,26 @@ export interface PostPayment {
     price: number;
     debitors: string[];
     creditor: string;
-    /** email of the user who created this payment */
+    /** username of the user who created this payment */
     author: string;
+
+    [key: string]: any;
+}
+
+export interface GetPaymentsForDebitorResponse {
+    payments: Payment[];
+
+    [key: string]: any;
+}
+
+export interface GetPaymentsForCreditorResponse {
+    payments: Payment[];
+
+    [key: string]: any;
+}
+
+export interface GetPaymentsForAuthorResponse {
+    payments: Payment[];
 
     [key: string]: any;
 }

@@ -15,13 +15,17 @@ import { CommonModule, NgFor } from '@angular/common';
 export class NewPaymentComponent implements OnInit {
 
   paymentForm: FormGroup = this.formBuilder.group({
-    author: ['', Validators.required, Validators.email],
-    creditor: ['', Validators.required, Validators.email],
-    description: ['', Validators.required],
+    author: '',
+    creditor: '',
+    description: '',
     paymentDate: [new Date(2024, 1, 1, 10, 0, 0, 0), Validators.required],
-    price: [0.00, Validators.required],
-    //debitors: this.formBuilder.array([])
-    debitors: new FormArray([])
+    price: 1.00,
+    debitors: this.formBuilder.array([
+      this.formBuilder.group({
+        debitor: ""
+      })
+    ])
+    //debitors: new FormArray([])
   });
 
   constructor(private http: HttpClient, 
@@ -39,6 +43,14 @@ export class NewPaymentComponent implements OnInit {
     });
 
     this.debitors.push(debitor);
+  }
+
+  removeDebitor(index: number) {
+    if(this.debitors.length <= 1) {
+      return;
+    }
+    
+    this.debitors.removeAt(index);
   }
 
   get debitors() {

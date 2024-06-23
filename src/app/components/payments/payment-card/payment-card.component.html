@@ -2,9 +2,10 @@
     <p>PaymentId: {{ paymentId }}</p>
     <p>PaymentDescription: {{ paymentDescription }}</p>
     <p>PaymentDate: {{ paymentDate }}</p>
+    <p>Author: {{ author }}</p>
     <p>Creditor: {{ creditor }}</p>
     <p>Price: {{ price }}€</p>
-    <p>Debitoren: {{ debitors.join(", ")}}</p>
+    <p *ngFor="let d of debitors; let i = index">{{ i+1 }}. Debitor: {{ d }}</p>
     <p>Price per Person: {{ getPricePerPerson() }}€</p>
     <p>Last Updated: {{ updateTime }}</p>
 </div>

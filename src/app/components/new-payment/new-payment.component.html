@@ -23,25 +23,26 @@
             <label class="label">Price</label>
             <input type="number" class="input" formControlName="price">
         </div>
-        <!--<div formArrayName="debitors">
-            <ng-container *ngFor="let debitor of paymentForm.value.debitors; let i = index">
-                <input type="text" [formGroup]="debitor" />
-            </ng-container>
-        </div>-->
-
         
         <div formArrayName="debitors">
             <label>Debitors</label>
-            <div *ngFor="let debitor of debitors.controls; let i = index" [formGroupName]="i">
-              <input formControlName="debitor" type="text">
+            <div 
+                *ngFor="let debitor of debitors.controls; let i = index" 
+                [formGroupName]="i"
+                class="debitor-container field">
+                <label>Debitor {{i+1}}</label>
+                <input formControlName="debitor" type="text" class="debitor-textfield">
+                <button (click)="removeDebitor(i)" class="button btn-remove-debitor" type="button">-</button>
             </div>
+            <button type="button" class="btn-add-debitor button" (click)="addDebitor()">Add Debitor</button>
         </div>
 
-        <button type="button" class="btn-add-debitor" (click)="addDebitor()">Add Debitor</button>
+
         <div>
-            <button type="submit" class="button">Create Payment</button>
+            <button class="btn-create-payment button" type="submit">Create Payment</button>
         </div>
 
-        {{ paymentForm.value | json }}
     </form>
+    {{ paymentForm.value | json }}
+
 </div>

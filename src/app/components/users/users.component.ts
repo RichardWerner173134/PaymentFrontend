@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { usersSelector } from '../../state/selector/app.selector';
@@ -28,7 +28,8 @@ export class UsersComponent {
       });
   }
 
-  search() {
-    throw new Error("Not implemented yet");
+  search($event: any) {
+    console.log("suchen nach nutzer " + $event.target.value);
+    
   }
 }

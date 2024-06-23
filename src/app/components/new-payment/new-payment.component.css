@@ -44,18 +44,37 @@ input {
     float: left;
 }
 
-button {
+.btn-create-payment {
     font-family: Georgia, "Times New Roman", Times, serif;
     height: 50px;
     width: 100%;
     border: 1px solid #000;
     margin-top: 10px;
     transition-duration: 0.4s;
-    background-color: rgb(128, 114, 175); /* Green */
+    background-color: rgb(128, 114, 175); 
     color: rgb(25, 9, 83);
 }
   
-button:hover {
-    background-color: rgb(25, 9, 83);; /* Green */
+.button:hover {
+    background-color: rgb(25, 9, 83);
     color: white; 
+}
+
+.debitor-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-remove-debitor {
+    width: 30px;
+    height: 100%;
+}
+
+.btn-add-debitor {
+    width: 85%;
+    margin-top: 20px;
+}
+
+.debitor-textfield {
+    height: 100%;
 }

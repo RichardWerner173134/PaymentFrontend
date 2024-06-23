@@ -1,9 +1,10 @@
+import { NgFor } from '@angular/common';
 import { Component, Input, input } from '@angular/core';
 
 @Component({
   selector: 'app-payment-card',
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: './payment-card.component.html',
   styleUrl: './payment-card.component.css'
 })

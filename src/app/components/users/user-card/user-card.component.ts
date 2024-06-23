@@ -18,5 +18,5 @@ export class UserCardComponent {
   id!: number;
 
   @Input()
-  email!: string;
+  username!: string;
 }
