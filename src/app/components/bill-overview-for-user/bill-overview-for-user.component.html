@@ -1,0 +1,19 @@
+<div class="bills-container">
+    <form class="filter-bills-form" [formGroup]="billsForm" (ngSubmit)="onSubmit()">
+
+        <div class="filter-bills-form-section">
+            <input formControlName="username" class="search-bar filter-bills-form-section-item" type="text" placeholder="Username">
+            
+            <button class="btn filter-bills-form-section-item" type="submit">Search</button>
+            <button class="btn filter-bills-form-section-item" type="button" (click)="reset()">Reset</button>
+        </div>
+    </form>
+    
+    <p *ngIf="calculationTime">CalculationTime: {{ calculationTime }}</p>
+    <p *ngIf="balance">Balance: {{ balance }}</p>
+    <div *ngFor="let bill of bills;" class="bill-for-user">
+        <p>Issued by: {{ bill.issuedBy }}</p>
+        <p>Issued for: {{ bill.issuedFor }}</p>
+        <p>Amount: {{ bill.amount }}€</p>
+    </div>
+</div>

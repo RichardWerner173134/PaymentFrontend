@@ -1,0 +1,94 @@
+.filter-bills-form {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.filter-bills-form-section {
+    padding: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.btn {
+    height: 35px;
+    background-color:rgb(160, 152, 190);
+}
+
+.filter-bills-form-section-item {
+    width: 20%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.search-bar {
+    height: 30px;
+}
+
+
+
+.bill-for-user {
+    border: 1px solid black;
+    margin: 15px;
+    padding: 15px
+}
+
+table {
+	border-collapse: collapse;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+table td {
+	padding: 15px;
+}
+table thead td {
+    background-color: rgb(160, 152, 190);
+	color: black;
+	font-weight: bold;
+	font-size: 13px;
+	border: 1px solid #54585d;
+}
+table tbody td {
+	color: #636363;
+	border: 1px solid #dddfe1;
+}
+table tbody tr {
+	background-color: #f9fafb;
+}
+table tbody tr:nth-child(odd) {
+	background-color: #ffffff;
+}
+
+.col-creditor {
+    width: 200px;    
+}
+
+.col-price {
+    width: 200px;    
+}
+
+.col-paymentdate {
+    width: 200px;    
+}
+
+.col-description {
+    width: 200px;    
+}
+
+.col-debitors {
+    width: 200px;    
+}
+
+.col-author {
+    width: 200px;    
+}
+
+.bill-composite-container {
+    width: 100%;
+}

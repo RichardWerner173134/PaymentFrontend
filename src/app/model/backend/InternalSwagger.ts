@@ -113,7 +113,7 @@ export interface GetBillOverviewForUser {
     calculationTime: Date;
     bills: ShortBill[];
     /** balance of the user over all bills. Positive -> you get money back. Negative -> you have to pay a lot */
-    balance?: number;
+    balance: number;
 
     [key: string]: any;
 }

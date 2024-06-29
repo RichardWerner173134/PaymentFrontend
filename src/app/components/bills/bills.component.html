@@ -1,0 +1,45 @@
+<div class="bills-container">
+    <form class="filter-bills-form" [formGroup]="billsForm" (ngSubmit)="onSubmit()">
+
+        <div class="filter-bills-form-section">
+            <input formControlName="username" class="search-bar filter-bills-form-section-item" type="text" placeholder="Username">
+            
+            <button class="btn filter-bills-form-section-item" type="submit">Search</button>
+            <button class="btn filter-bills-form-section-item" type="button" (click)="reset()">Reset</button>
+        </div>
+    </form>
+    
+    <p *ngIf="calculationTime">CalculationTime: {{ calculationTime }}</p>
+    <div *ngFor="let bill of bills;" class="bill-for-user">
+        <p>Issued by: {{ bill.issuedBy }}</p>
+        <p>Issued for: {{ bill.issuedFor }}</p>
+        <p>Amount: {{ bill.amount }}€</p>
+
+        <div class="bill-composite-container">
+            <table>
+                <thead>
+                    <tr>
+                        <td class="col-bill-part">Portion To Pay</td>
+                        <td class="col-creditor">Creditor</td>
+                        <td class="col-price">Price</td>
+                        <td class="col-paymentdate">Date of Payment</td>
+                        <td class="col-description">Description</td>
+                        <td class="col-debitors">Debitors</td>
+                        <td class="col-author">Author</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let composite of bill.billComposites;">
+                        <td>{{ composite.amount }}€</td>
+                        <td>{{ composite.payment.creditor }}</td>
+                        <td>{{ composite.payment.price }}€</td>
+                        <td>{{ composite.payment.paymentDate }}</td>
+                        <td>{{ composite.payment.paymentDescription }}</td>
+                        <td>{{ composite.payment.debitors.join(", ") }}</td>
+                        <td>{{ composite.payment.author }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

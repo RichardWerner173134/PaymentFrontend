@@ -17,6 +17,9 @@ import { UsersComponent } from "./components/users/users.component";
 import { NewPaymentComponent } from "./components/new-payment/new-payment.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { PaymentsForUserComponent } from "./components/payments-for-user/payments-for-user.component";
+import { PaymentOverviewForUserComponent } from "./components/payment-overview-for-user/payment-overview-for-user.component";
+import { BillsComponent } from "./components/bills/bills.component";
+import { BillOverviewForUserComponent } from "./components/bill-overview-for-user/bill-overview-for-user.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -24,6 +27,9 @@ const routes: Routes = [
     { path: 'impressum', component: ImpressumComponent },
     { path: 'payments', component: PaymentsComponent },
     { path: 'payments-for-user', component: PaymentsForUserComponent },
+    { path: 'payment-overview-for-user', component: PaymentOverviewForUserComponent },
+    { path: 'bills', component: BillsComponent },
+    { path: 'bills-overview-for-user', component: BillOverviewForUserComponent },
     { path: 'login', component: LoginComponent },
     { path: 'new-payment-container', component: NewPaymentComponent },
     { path: '**', component: HomeComponent }

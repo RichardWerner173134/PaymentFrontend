@@ -60,8 +60,6 @@ export class NewPaymentComponent implements OnInit {
   onSubmit(){
     let url = "http://localhost:7066/api/payments";
 
-    console.log(this.mapDebitors(this.paymentForm.value.debitors));
-
     let body: PostPaymentRequest = {
       payment: {
         author: this.paymentForm.value.author,

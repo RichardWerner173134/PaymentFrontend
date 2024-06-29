@@ -23,15 +23,13 @@ export class PaymentsForUserComponent {
   ];
 
   paymentFilter: FormGroup = this.formBuilder.group({
-    selection: this.formBuilder.nonNullable.control('Debitor'),
+    selection: this.formBuilder.nonNullable.control('Creditor'),
     username: 'Richard'
   });
 
   payments: Payment[] = [];
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
-
-  }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
   onSubmit() {
     let selection: string = this.paymentFilter.value.selection;
@@ -53,5 +51,6 @@ export class PaymentsForUserComponent {
 
   reset() {
     this.paymentFilter.reset();
+    this.payments = [];
   }
 }
