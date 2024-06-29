@@ -1,11 +1,15 @@
 <div class="payment-card-container">
-    <p>PaymentId: {{ paymentId }}</p>
-    <p>PaymentDescription: {{ paymentDescription }}</p>
-    <p>PaymentDate: {{ paymentDate }}</p>
-    <p>Author: {{ author }}</p>
-    <p>Creditor: {{ creditor }}</p>
-    <p>Price: {{ price }}€</p>
-    <p *ngFor="let d of debitors; let i = index">{{ i+1 }}. Debitor: {{ d }}</p>
-    <p>Price per Person: {{ getPricePerPerson() }}€</p>
-    <p>Last Updated: {{ updateTime }}</p>
+    <div class="payment-info">
+        <p>PaymentId: {{ paymentId }}</p>
+        <p>PaymentDescription: {{ paymentDescription }}</p>
+        <p>PaymentDate: {{ paymentDate }}</p>
+        <p>Author: {{ author }}</p>
+        <p>Creditor: {{ creditor }}</p>
+        <p>Price: {{ price }}€</p>
+        <p>Last Updated: {{ updateTime }}</p>
+        <p>Price per Person: {{ getPricePerPerson() }}€</p>
+    </div>
+    <div class="debitor-list">
+        <p *ngFor="let d of debitors; let i = index">{{ i+1 }}. Debitor: {{ d }}</p>
+    </div>
 </div>

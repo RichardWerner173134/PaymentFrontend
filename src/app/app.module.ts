@@ -16,12 +16,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UsersComponent } from "./components/users/users.component";
 import { NewPaymentComponent } from "./components/new-payment/new-payment.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { PaymentsForUserComponent } from "./components/payments-for-user/payments-for-user.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'users', component: UsersComponent },
     { path: 'impressum', component: ImpressumComponent },
     { path: 'payments', component: PaymentsComponent },
+    { path: 'payments-for-user', component: PaymentsForUserComponent },
     { path: 'login', component: LoginComponent },
     { path: 'new-payment-container', component: NewPaymentComponent },
     { path: '**', component: HomeComponent }

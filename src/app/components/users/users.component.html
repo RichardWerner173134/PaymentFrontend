@@ -1,12 +1,26 @@
 <div>
-    <input class="search" type="text" placeholder="Search for users" (keyup.enter)="search($event)">
+    <input id="user-search-bar" class="search" type="text" placeholder="Search for users" (keyup)="search($event)">
+    <button class="btn-reset" (click)="reset()">Reset</button>
     <ul class="users-list">
+        <div 
+            *ngIf="searchedUsers == undefined; else searchedUserCard">
+            <app-user-card 
+                *ngFor="let user of users$ | async"
+                [firstName]="user.firstName" 
+                [lastName]="user.lastName"
+                [id]="user.id"
+                [username]="user.username">
+            </app-user-card>
+        </div>
+    </ul>
+
+    <ng-template #searchedUserCard>
         <app-user-card 
-            *ngFor="let user of users$ | async"
+            *ngFor="let user of searchedUsers"
             [firstName]="user.firstName" 
             [lastName]="user.lastName"
             [id]="user.id"
             [username]="user.username">
         </app-user-card>
-    </ul>
+    </ng-template>
 </div>

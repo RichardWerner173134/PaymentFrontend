@@ -82,3 +82,69 @@ export interface GetPaymentsForAuthorResponse {
 
     [key: string]: any;
 }
+
+export interface GetPaymentOverviewForDebitorResponse {
+    payments: Payment[];
+    /** date of the calculation */
+    calculationTime: Date;
+    totalDebitorOnly: number;
+
+    [key: string]: any;
+}
+
+export interface GetPaymentOverviewForCreditorResponse {
+    payments: Payment[];
+    /** date of the calculation */
+    calculationTime: Date;
+    totalWithCreditor: number;
+    totalWithoutCreditor: number;
+
+    [key: string]: any;
+}
+
+export interface GetAllBillsResponse {
+    calculationTime: Date;
+    bills: Bill[];
+
+    [key: string]: any;
+}
+
+export interface GetBillOverviewForUser {
+    calculationTime: Date;
+    bills: ShortBill[];
+    /** balance of the user over all bills. Positive -> you get money back. Negative -> you have to pay a lot */
+    balance?: number;
+
+    [key: string]: any;
+}
+
+export interface Bill {
+    /** receiver of the money issued with this bill */
+    issuedBy: string;
+    /** receiver of the money issued with this bill */
+    issuedFor: string;
+    /** amount of money that needs to be transfered to the receiver of the bill */
+    amount: number;
+    billComposites: BillComposite[];
+
+    [key: string]: any;
+}
+
+export interface ShortBill {
+    /** receiver of the money issued with this bill */
+    issuedBy: string;
+    /** receiver of the money issued with this bill */
+    issuedFor: string;
+    /** amount of money that needs to be transfered to the receiver of the bill */
+    amount: number;
+
+    [key: string]: any;
+}
+
+export interface BillComposite {
+    /** portion of the payment price the user issuedFor has to pay to issuedBy */
+    amount: number;
+    payment: Payment;
+
+    [key: string]: any;
+}
