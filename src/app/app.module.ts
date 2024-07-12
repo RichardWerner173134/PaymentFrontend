@@ -8,7 +8,6 @@ import { NavbarComponent } from "./shared/navbar/navbar.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { ImpressumComponent } from "./shared/impressum/impressum.component";
 import { PaymentsComponent } from "./components/payments/payments.component";
-import { LoginComponent } from "./components/login/login.component";
 import { StoreModule } from '@ngrx/store';
 import { apiReducer } from "./state/reducer/app.reducer";
 import { CommonModule, NgFor } from "@angular/common";
@@ -24,14 +23,13 @@ import { BillOverviewForUserComponent } from "./components/bill-overview-for-use
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'users', component: UsersComponent },
+    { path: 'payments/create', component: NewPaymentComponent },
     { path: 'impressum', component: ImpressumComponent },
     { path: 'payments', component: PaymentsComponent },
     { path: 'payments-for-user', component: PaymentsForUserComponent },
     { path: 'payment-overview-for-user', component: PaymentOverviewForUserComponent },
     { path: 'bills', component: BillsComponent },
     { path: 'bills-overview-for-user', component: BillOverviewForUserComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'new-payment-container', component: NewPaymentComponent },
     { path: '**', component: HomeComponent }
 ];
 
