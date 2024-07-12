@@ -10,7 +10,7 @@ import { CommonModule, NgFor } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule],
   templateUrl: './payments-for-user.component.html',
-  styleUrl: './payments-for-user.component.css'
+  styleUrl: './payments-for-user.component.scss'
 })
 export class PaymentsForUserComponent {
   url: string = "http://localhost:7066/api/";

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   standalone: true,
   imports: [NgIf],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css'
+  styleUrl: './footer.component.scss'
 })
 export class FooterComponent implements OnInit{
   show: boolean = true;

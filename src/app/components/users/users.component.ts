@@ -13,7 +13,7 @@ import { GetUsersResponse, User } from '../../model/backend/InternalSwagger';
   standalone: true,
   imports: [NgFor, UserCardComponent, CommonModule, NgIf],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  styleUrl: './users.component.scss'
 })
 export class UsersComponent {
   users$: Observable<User[]> = this.store.select(usersSelector);

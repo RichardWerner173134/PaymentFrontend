@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule],
   templateUrl: './bills.component.html',
-  styleUrl: './bills.component.css'
+  styleUrl: './bills.component.scss'
 })
 export class BillsComponent implements OnInit {
   billsForm: FormGroup = this.formBuilder.group({

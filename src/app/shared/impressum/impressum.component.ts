@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './impressum.component.html',
-  styleUrl: './impressum.component.css'
+  styleUrl: './impressum.component.scss'
 })
 export class ImpressumComponent {
 

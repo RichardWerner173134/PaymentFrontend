@@ -10,7 +10,7 @@ import { CommonModule, NgFor } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule],
   templateUrl: './new-payment.component.html',
-  styleUrl: './new-payment.component.css'
+  styleUrl: './new-payment.component.scss'
 })
 export class NewPaymentComponent implements OnInit {
 

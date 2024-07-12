@@ -13,7 +13,7 @@ import { GetPaymentsResponse, Payment } from '../../model/backend/InternalSwagge
   standalone: true,
   imports: [CommonModule, PaymentCardComponent],
   templateUrl: './payments.component.html',
-  styleUrl: './payments.component.css'
+  styleUrl: './payments.component.scss'
 })
 export class PaymentsComponent implements OnInit {
 

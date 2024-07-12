@@ -9,7 +9,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     RouterOutlet
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
 

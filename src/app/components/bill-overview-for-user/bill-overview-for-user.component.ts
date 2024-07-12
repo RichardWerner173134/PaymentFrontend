@@ -10,7 +10,7 @@ import { RouterOutlet, RouterModule } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule],
   templateUrl: './bill-overview-for-user.component.html',
-  styleUrl: './bill-overview-for-user.component.css'
+  styleUrl: './bill-overview-for-user.component.scss'
 })
 export class BillOverviewForUserComponent {
   billsForm: FormGroup = this.formBuilder.group({

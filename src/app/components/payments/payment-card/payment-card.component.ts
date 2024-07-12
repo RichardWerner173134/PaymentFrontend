@@ -6,7 +6,7 @@ import { Component, Input, input } from '@angular/core';
   standalone: true,
   imports: [NgFor],
   templateUrl: './payment-card.component.html',
-  styleUrl: './payment-card.component.css'
+  styleUrl: './payment-card.component.scss'
 })
 export class PaymentCardComponent {
   @Input()

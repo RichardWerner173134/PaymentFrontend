@@ -10,7 +10,7 @@ import { RouterOutlet, RouterModule } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule],
   templateUrl: './payment-overview-for-user.component.html',
-  styleUrl: './payment-overview-for-user.component.css'
+  styleUrl: './payment-overview-for-user.component.scss'
 })
 export class PaymentOverviewForUserComponent {
   url: string = "http://localhost:7066/api/";
