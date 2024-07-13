@@ -4,11 +4,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { GetPaymentsForCreditorResponse, GetPaymentsForDebitorResponse, Payment, PostPaymentRequest } from '../../model/backend/InternalSwagger';
 import { CommonModule, NgFor } from '@angular/common';
+import { of } from 'rxjs';
+import { PaymentsTableComponent } from '../../shared/payments-table/payments-table.component';
 
 @Component({
   selector: 'app-payments-for-user',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule],
+  imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule, PaymentsTableComponent],
   templateUrl: './payments-for-user.component.html',
   styleUrl: './payments-for-user.component.scss'
 })
@@ -24,7 +26,7 @@ export class PaymentsForUserComponent {
 
   paymentFilter: FormGroup = this.formBuilder.group({
     selection: this.formBuilder.nonNullable.control('Creditor'),
-    username: 'Richard'
+    username: ''
   });
 
   payments: Payment[] = [];

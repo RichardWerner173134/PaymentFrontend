@@ -1,11 +1,3 @@
-<app-payment-card
-    *ngFor="let payment of payments$ | async"
-    [paymentId]="payment.paymentId"
-    [paymentDescription]="payment.paymentDescription"
-    [paymentDate]="payment.paymentDate"
-    [price]="payment.price"
-    [debitors]="payment.debitors"
-    [creditor]="payment.creditor"
-    [author]="payment.author"
-    [updateTime]="payment.updateTime">
-</app-payment-card>
+<div class="payments-container">
+    <app-payments-table [payments]="payments"></app-payments-table>
+</div>

@@ -28,6 +28,12 @@ export interface PostPaymentRequest {
     [key: string]: any;
 }
 
+export interface GetPaymentsByIdResponse {
+    payments?: Payment[];
+
+    [key: string]: any;
+}
+
 export interface User {
     id: number;
     username: string;
@@ -109,7 +115,21 @@ export interface GetAllBillsResponse {
     [key: string]: any;
 }
 
-export interface GetBillOverviewForUser {
+export interface GetBillsForUserResponse {
+    calculationTime: Date;
+    bills: Bill[];
+
+    [key: string]: any;
+}
+
+export interface GetAllBillOverviewsResponse {
+    calculationTime: Date;
+    bills: ShortBill[];
+
+    [key: string]: any;
+}
+
+export interface GetBillOverviewsForUserResponse {
     calculationTime: Date;
     bills: ShortBill[];
     /** balance of the user over all bills. Positive -> you get money back. Negative -> you have to pay a lot */

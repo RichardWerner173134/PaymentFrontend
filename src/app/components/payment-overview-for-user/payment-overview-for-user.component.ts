@@ -23,8 +23,8 @@ export class PaymentOverviewForUserComponent {
   ];
 
   paymentFilter: FormGroup = this.formBuilder.group({
-    selection: this.formBuilder.nonNullable.control('Debitor'),
-    username: 'Richard'
+    selection: this.formBuilder.nonNullable.control('Creditor'),
+    username: ''
   });
 
   payments: Payment[] = [];
@@ -40,10 +40,11 @@ export class PaymentOverviewForUserComponent {
     let selection: string = this.paymentFilter.value.selection;
     let username: string = this.paymentFilter.value.username;
     
+    
     if(selection == '' || selection == undefined || username == '' || username == undefined){
       return;
     }
-
+    
     if(selection == 'Creditor'){
       this.http.get<GetPaymentOverviewForCreditorResponse>(this.url + this.creditorPath + username.toLowerCase())
         .subscribe(data => {
@@ -51,10 +52,8 @@ export class PaymentOverviewForUserComponent {
           this.calculationTime = data.calculationTime;
           this.totalWithCreditor = data.totalWithCreditor;
           this.totalWithoutCreditor = data.totalWithoutCreditor; 
-
           this.totalDebitorOnly = undefined;
-    });
-      
+        });
     } else {
       this.http.get<GetPaymentOverviewForDebitorResponse>(this.url + this.debitorPath + username.toLowerCase())
         .subscribe(data => {

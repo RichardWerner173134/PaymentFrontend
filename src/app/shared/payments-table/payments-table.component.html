@@ -1,0 +1,24 @@
+<div class="payments-container">
+    <table>
+        <thead>
+            <tr>
+                <td class="col-creditor">Creditor</td>
+                <td class="col-price">Price</td>
+                <td class="col-paymentdate">Date of Payment</td>
+                <td class="col-description">Description</td>
+                <td class="col-debitors">Debitors</td>
+                <td class="col-author">Author</td>
+            </tr>
+        </thead>
+        <tbody *ngIf="payments != null">
+            <tr *ngFor="let payment of payments">
+                <td>{{ payment.creditor }}</td>
+                <td>{{ payment.price }}€</td>
+                <td>{{ payment.paymentDate }}</td>
+                <td>{{ payment.paymentDescription }}</td>
+                <td>{{ payment.debitors.join(", ") }}</td>
+                <td>{{ payment.author }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

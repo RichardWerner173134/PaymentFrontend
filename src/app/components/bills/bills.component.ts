@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Bill, GetAllBillsResponse } from '../../model/backend/InternalSwagger';
+import { Bill, GetAllBillsResponse, GetBillOverviewsForUserResponse, GetBillsForUserResponse } from '../../model/backend/InternalSwagger';
 import { CommonModule, NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule, RouterOutlet } from '@angular/router';
@@ -14,14 +14,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class BillsComponent implements OnInit {
   billsForm: FormGroup = this.formBuilder.group({
-    username: 'Richard'
+    username: ''
   });
   
   bills: Bill[] = [];
   calculationTime?: Date;
 
   url: string = "http://localhost:7066/api/bills";
-  urlBillsForUser: string = "http://localhost:7066/api/bills-for-user/";
+  urlBillsForUser: string = "http://localhost:7066/api/bills/all/users/";
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient){}
 
@@ -44,7 +44,7 @@ export class BillsComponent implements OnInit {
       this.http.get<GetAllBillsResponse>(this.url)
         .subscribe(data => this.bills = data.bills);
     } else {
-      this.http.get<GetAllBillsResponse>(this.urlBillsForUser + username.toLowerCase())
+      this.http.get<GetBillsForUserResponse>(this.urlBillsForUser + username.toLowerCase())
         .subscribe(data => this.bills = data.bills);
     }
   }

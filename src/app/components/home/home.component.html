@@ -3,33 +3,33 @@
 <ol style="--length: 7" role="list">
     <li style="--i: 1" class="li-links">
         <h3>Rechnung erfassen</h3>
-        <span></span>
+        <span>Du hast etwas bezahlt? Dann kannst du hier die Rechnung erfassen. Dabei kannst du hinterlegen, wieviel du wann für wen wofür bezahlt hast.</span>
         <a [routerLink]="['/payments/create']" class="stretched-link"></a>
     </li>
 	<li style="--i: 2" class="li-links">
 		<h3>Rechnungen anschauen</h3>
-        <span>Alle Rechnungen anschauen</span>
+        <span>Hier gibt es einen Überblick über alle erfassten Rechnungen. Jede dieser Rechnungen fließt in die Berechnung der Quittungen mit ein.</span>
         <a [routerLink]="['/payments']" class="stretched-link"></a>
 	</li>
 	<li style="--i: 3" class="li-links">
         <h3>Rechnungen filtern</h3>
-        <span>Welche Rechnungen wurden von/für NutzerX bezahlt?</span>
+        <span>Hier können Rechnungen nach Nutzern gefiltert werden. Du möchtest wissen, wieviel du bezahlt hast? Oder welche Rechnungen alles für dich bezahlt wurden? Das findest du hier.</span>
         <a [routerLink]="['/payments-for-user']" class="stretched-link"></a>        
     </li>
 	<li style="--i: 4" class="li-links">
         <h3>Rechnungsübersicht</h3>
-        <span>Wieviel wurde nur für mich bezahlt? Wieviel habe ich nur für andere bezahlt?</span>
+        <span>In dieser Ansicht findest du zusätzlich zu der gefilterten Rechnungsansicht auch konkrete Summen für einen bestimmten Nutzer. Du möchtest wissen wieviel in Summe für dich bezahlt wurde? Oder wieviel du in Summe für andere ausgegeben hast?</span>
         <a [routerLink]="['/payment-overview-for-user']" class="stretched-link"></a>
 	</li>
     <li style="--i: 5" class="li-links">
-        <h3>Quittung erstellen (mit Aufschlüsselung der Rechnungen)</h3>
-        <span></span>
-        <a [routerLink]="['/bills']" class="stretched-link"></a>
-	</li>
-    <li style="--i: 6" class="li-links">
-        <h3>Quittung erstellen (ohne Aufschlüsselung der Rechnungen)</h3>
-        <span></span>
+        <h3>Quittung erstellen (kurz)</h3>
+        <span>Hier werden alle Quittungen angezeigt. Für jede Quittung gibt es einen Gläubiger und einen Schuldner. Der Schuldner muss dem Gläubiger den angezeigten Betrag bezahlen.</span>
         <a [routerLink]="['/bills-overview-for-user']" class="stretched-link"></a>
+    </li>
+    <li style="--i: 6" class="li-links">
+        <h3>Quittung erstellen (lang)</h3>
+        <span>Hier werden alle Quittungen angezeigt. Jede gültige Bezahlung fließt in die Berechnung ein. Dabei erhält jeder Nutzer eine Liste an Quittungen, die zu bezahlen sind. Es werden zusätzlich die Rechnungen aufgelistet, die in der Berechnung verwendet wurden. Für jede Rechnung wird zusätzlich der Anteil angezeigt.</span>
+        <a [routerLink]="['/bills']" class="stretched-link"></a>
 	</li>
     <li style="--i: 7" class="li-links">
         <h3>Nutzer</h3>
