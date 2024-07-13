@@ -2,18 +2,18 @@
     <form class="filter-bills-form" [formGroup]="billsForm" (ngSubmit)="onSubmit()">
 
         <div class="filter-bills-form-section">
-            <input formControlName="username" class="search-bar filter-bills-form-section-item" type="text" placeholder="Username">
+            <input formControlName="username" class="search-bar filter-bills-form-section-item" type="text" placeholder="Nutzername">
             
-            <button class="btn filter-bills-form-section-item" type="submit">Search</button>
-            <button class="btn filter-bills-form-section-item" type="button" (click)="reset()">Reset</button>
+            <button class="btn filter-bills-form-section-item" type="submit">Suchen</button>
+            <button class="btn filter-bills-form-section-item" type="button" (click)="reset()">Zurücksetzen</button>
         </div>
     </form>
     
-    <p *ngIf="calculationTime">CalculationTime: {{ calculationTime }}</p>
-    <p *ngIf="balance">Balance: {{ balance }}</p>
+    <p *ngIf="calculationTime">Berechnungszeitpunkt: {{ calculationTime }}</p>
+    <p *ngIf="balance">Summe: {{ balance }}€</p>
     <div *ngFor="let bill of bills;" class="bill-for-user">
-        <p>Issued by: {{ bill.issuedBy }}</p>
-        <p>Issued for: {{ bill.issuedFor }}</p>
-        <p>Amount: {{ bill.amount }}€</p>
+        <p>Gläubiger: {{ bill.issuedBy }}</p>
+        <p>Schuldner: {{ bill.issuedFor }}</p>
+        <p>Betrag: {{ bill.amount }}€</p>
     </div>
 </div>

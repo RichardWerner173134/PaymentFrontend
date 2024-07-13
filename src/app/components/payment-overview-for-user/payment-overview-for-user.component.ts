@@ -4,11 +4,12 @@ import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Payment, GetPaymentOverviewForCreditorResponse, GetPaymentOverviewForDebitorResponse } from '../../model/backend/InternalSwagger';
 import { NgFor, CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule } from '@angular/router';
+import { PaymentsTableComponent } from "../../shared/payments-table/payments-table.component";
 
 @Component({
   selector: 'app-payment-overview-for-user',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule],
+  imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule, PaymentsTableComponent],
   templateUrl: './payment-overview-for-user.component.html',
   styleUrl: './payment-overview-for-user.component.scss'
 })

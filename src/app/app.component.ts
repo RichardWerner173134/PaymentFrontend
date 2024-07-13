@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Payment App';
+  title = 'Kostenstelle Kranplatzverdichtung im Böhmerwald'
 }

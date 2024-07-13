@@ -2,50 +2,27 @@
     <form class="filter-payments-form" [formGroup]="paymentFilter" (ngSubmit)="onSubmit()">
 
         <div class="filter-payments-form-section">
-            <input formControlName="username" class="search-bar filter-payments-form-section-item" type="text" placeholder="Username">
+            <input formControlName="username" class="search-bar filter-payments-form-section-item" type="text" placeholder="Nutzername">
         
             <select class="usertype-selection filter-payments-form-section-item" formControlName="selection">
                 <option *ngFor="let state of states" [ngValue]="state">{{ state }}</option>
             </select>
             
-            <button class="btn filter-payments-form-section-item" type="submit">Search</button>
-            <button class="btn filter-payments-form-section-item" type="button" (click)="reset()">Reset</button>
+            <button class="btn filter-payments-form-section-item" type="submit">Suchen</button>
+            <button class="btn filter-payments-form-section-item" type="button" (click)="reset()">Zurücksetzen</button>
         </div>
     </form>
 
     <div *ngIf="totalWithCreditor && totalWithoutCreditor && calculationTime" class="overview-container">
-        <p>Your total payments including yourself: {{ totalWithCreditor }}€</p>
-        <p>Your total payments excluding yourself: {{ totalWithoutCreditor }}€</p>
-        <p>CalculationTime: {{ calculationTime }}</p>
+        <p>Soviel hast du insgesamt bezahlt: {{ totalWithCreditor }}€</p>
+        <p>Soviel hast du für andere bezahlt: {{ totalWithoutCreditor }}€</p>
+        <p>Berechnungszeitpunkt: {{ calculationTime }}</p>
     </div>
 
     <div *ngIf="totalDebitorOnly && calculationTime" class="overview-container">
-        <p>Total of payments made for you: {{ totalDebitorOnly }}€</p>
-        <p>CalculationTime: {{ calculationTime }}</p>
+        <p>Soviel wurde für dich bezahlt: {{ totalDebitorOnly }}€</p>
+        <p>Berechnungszeitpunkt: {{ calculationTime }}</p>
     </div>
 
-    <div class="payments-container">
-        <table>
-            <thead>
-                <tr>
-                    <td class="col-creditor">Creditor</td>
-                    <td class="col-price">Price</td>
-                    <td class="col-paymentdate">Date of Payment</td>
-                    <td class="col-description">Description</td>
-                    <td class="col-debitors">Debitors</td>
-                    <td class="col-author">Author</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let payment of payments;">
-                    <td>{{ payment.creditor }}</td>
-                    <td>{{ payment.price }}€</td>
-                    <td>{{ payment.paymentDate }}</td>
-                    <td>{{ payment.paymentDescription }}</td>
-                    <td>{{ payment.debitors.join(", ") }}</td>
-                    <td>{{ payment.author }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <app-payments-table [payments]="payments"></app-payments-table>
 </div>

@@ -1,6 +1,6 @@
 <div>
-    <input id="user-search-bar" class="search" type="text" placeholder="Search for users" (keyup)="search($event)">
-    <button class="btn-reset" (click)="reset()">Reset</button>
+    <input id="user-search-bar" class="search" type="text" placeholder="Nutzername" (keyup)="search($event)">
+    <button class="btn-reset" (click)="reset()">Zurücksetzen</button>
     <ul class="users-list">
         <div 
             *ngIf="searchedUsers == undefined; else searchedUserCard">

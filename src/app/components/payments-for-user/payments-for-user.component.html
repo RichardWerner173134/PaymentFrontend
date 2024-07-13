@@ -2,14 +2,14 @@
     <form class="filter-payments-form" [formGroup]="paymentFilter" (ngSubmit)="onSubmit()">
 
         <div class="filter-payments-form-section">
-            <input formControlName="username" class="search-bar filter-payments-form-section-item" type="text" placeholder="Username">
+            <input formControlName="username" class="search-bar filter-payments-form-section-item" type="text" placeholder="Nutzername">
         
             <select class="usertype-selection filter-payments-form-section-item" formControlName="selection">
                 <option *ngFor="let state of states" [ngValue]="state">{{ state }}</option>
             </select>
             
-            <button class="btn filter-payments-form-section-item" type="submit">Search</button>
-            <button class="btn filter-payments-form-section-item" type="button" (click)="reset()">Reset</button>
+            <button class="btn filter-payments-form-section-item" type="submit">Suchen</button>
+            <button class="btn filter-payments-form-section-item" type="button" (click)="reset()">Zurücksetzen</button>
         </div>
     </form>
 
