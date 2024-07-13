@@ -1,9 +1,12 @@
 <div class="new-payment-container form-style-3">
+    <datalist id="suggestions">
+        <option *ngFor="let user of users$ | async" [value]="user.username">
+    </datalist>
 
     <form class="post-payment-form" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
         <label for="field1">
             <span>Gläubiger</span>
-            <input type="text" class="input-field" name="field1" value="" formControlName="creditor"/>
+            <input type="text" class="input-field" name="field1" value="" formControlName="creditor" list="suggestions"/>
         </label>
         <label for="field2">
             <span>Beschreibung</span>
@@ -20,7 +23,7 @@
 
         <label for="field5">
             <span>Verfasser</span>
-            <input type="text" class="input-field" name="field5" value="" formControlName="author"/>
+            <input type="text" class="input-field" name="field5" value="" formControlName="author" list="suggestions"/>
         </label>
         
         <fieldset>
@@ -30,7 +33,7 @@
                 <div *ngFor="let debitor of debitors.controls; let i = index" [formGroupName]="i">
                     <label [htmlFor]="'debfield' + i">
                         <span>Schuldner {{ i + 1 }}</span>
-                        <input type="text" class="input-field" [name]="'debfield' + i" value="" formControlName="debitor">
+                        <input type="text" class="input-field" [name]="'debfield' + i" value="" formControlName="debitor" list="suggestions">
                         <input (click)="removeDebitor(i)" type="button" value="Entfernen"/>
                     </label>                
                 </div>

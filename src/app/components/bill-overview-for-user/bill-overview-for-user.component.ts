@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GetAllBillOverviewsResponse, GetBillOverviewsForUserResponse, ShortBill } from '../../model/backend/InternalSwagger';
+import { GetAllBillOverviewsResponse, GetBillOverviewsForUserResponse, GetUsersResponse, ShortBill, User } from '../../model/backend/InternalSwagger';
 import { NgFor, CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule } from '@angular/router';
+import { usersSelector } from '../../state/selector/app.selector';
+import { map, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { fetchUsersSuccess } from '../../state/action/app.action';
 
 @Component({
   selector: 'app-bill-overview-for-user',
@@ -12,7 +16,11 @@ import { RouterOutlet, RouterModule } from '@angular/router';
   templateUrl: './bill-overview-for-user.component.html',
   styleUrl: './bill-overview-for-user.component.scss'
 })
-export class BillOverviewForUserComponent {
+export class BillOverviewForUserComponent implements OnInit {
+  users$: Observable<User[]> = this.store.select(usersSelector);
+  url: string = "http://localhost:7066/api/";
+  usersPath: string = "users";
+    
   billsForm: FormGroup = this.formBuilder.group({
     username: ''
   });
@@ -24,7 +32,11 @@ export class BillOverviewForUserComponent {
   billOverviewsUrl: string = "http://localhost:7066/api/bill-overviews";
   billOverviewForUserUrl: string = "http://localhost:7066/api/bill-overviews/all/users/";
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient){}
+  constructor(
+    private formBuilder: FormBuilder, 
+    private http: HttpClient,
+    private store: Store
+  ){}
 
   ngOnInit(): void {
     this.http.get<GetAllBillOverviewsResponse>(this.billOverviewsUrl)
@@ -33,6 +45,16 @@ export class BillOverviewForUserComponent {
           this.calculationTime = data.calculationTime;
           this.balance = undefined;
         });
+
+      this.users$.pipe(map(u => u.length > 0)).subscribe(data => {
+        console.log(data);
+        if(data === false) {
+          this.http.get<GetUsersResponse>(this.url + this.usersPath)
+          .subscribe(data => {
+            this.store.dispatch(fetchUsersSuccess({users: data.userList}));
+          });
+        }
+      });
   }
  
   reset() {

@@ -17,17 +17,23 @@ import { GetUsersResponse, User } from '../../model/backend/InternalSwagger';
 })
 export class UsersComponent {
   users$: Observable<User[]> = this.store.select(usersSelector);
+  url: string = "http://localhost:7066/api/";
+  usersPath: string = "users";
 
   searchedUsers: User[] | undefined = undefined;
 
   constructor(private readonly store:Store, private http:HttpClient) {}
 
   ngOnInit(): void {
-    this.http
-      .get<GetUsersResponse>("http://localhost:7066/api/users")
-      .subscribe(data => {
-        this.store.dispatch(fetchUsersSuccess({ users: data.userList }));
-      });
+    this.users$.pipe(map(u => u.length > 0)).subscribe(data => {
+      console.log(data);
+      if(data === false) {
+        this.http.get<GetUsersResponse>(this.url + this.usersPath)
+        .subscribe(data => {
+          this.store.dispatch(fetchUsersSuccess({users: data.userList}));
+        });
+      }
+    });
   }
 
   search($event: any) {

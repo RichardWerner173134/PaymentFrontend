@@ -2,8 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,  } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { PostPaymentRequest } from '../../model/backend/InternalSwagger';
+import { GetUsersResponse, PostPaymentRequest, User } from '../../model/backend/InternalSwagger';
 import { CommonModule, NgFor } from '@angular/common';
+import { map, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { usersSelector } from '../../state/selector/app.selector';
+import { fetchUsersSuccess } from '../../state/action/app.action';
 
 @Component({
   selector: 'app-new-payment',
@@ -13,6 +17,8 @@ import { CommonModule, NgFor } from '@angular/common';
   styleUrl: './new-payment.component.scss'
 })
 export class NewPaymentComponent implements OnInit {
+  url: string = "http://localhost:7066/api/";
+  usersPath: string = "users";
 
   paymentForm: FormGroup = this.formBuilder.group({
     author: '',
@@ -28,14 +34,26 @@ export class NewPaymentComponent implements OnInit {
     //debitors: new FormArray([])
   });
 
+  users$: Observable<User[]> = this.store.select(usersSelector);
+  
   constructor(private http: HttpClient, 
     private formBuilder: FormBuilder,
-    private router: Router) {
-      
+    private router: Router,
+    private store: Store) {
   }
 
   ngOnInit(): void {
+    this.users$.pipe(map(u => u.length > 0)).subscribe(data => {
+      console.log(data);
+      if(data === false) {
+        this.http.get<GetUsersResponse>(this.url + this.usersPath)
+        .subscribe(data => {
+          this.store.dispatch(fetchUsersSuccess({users: data.userList}));
+        });
+      }
+    });
   }
+
 
   addDebitor() {
     const debitor = this.formBuilder.group({

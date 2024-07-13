@@ -18,6 +18,9 @@
                 <td>{{ payment.paymentDescription }}</td>
                 <td>{{ payment.debitors.join(", ") }}</td>
                 <td>{{ payment.author }}</td>
+                <td *ngIf="withDelete">
+                    <input type="button" value="Löschen" (click)="deletePayment(payment.paymentId)" class="btn"/>
+                </td>
             </tr>
         </tbody>
     </table>

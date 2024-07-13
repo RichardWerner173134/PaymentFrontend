@@ -1,8 +1,12 @@
 <div class="bills-container">
+    <datalist id="suggestions">
+        <option *ngFor="let user of users$ | async" [value]="user.username">
+    </datalist>
+    
     <form class="filter-bills-form" [formGroup]="billsForm" (ngSubmit)="onSubmit()">
 
         <div class="filter-bills-form-section">
-            <input formControlName="username" class="search-bar filter-bills-form-section-item" type="text" placeholder="Nutzername">
+            <input formControlName="username" class="search-bar filter-bills-form-section-item" type="text" placeholder="Nutzername" list="suggestions">
             
             <button class="btn filter-bills-form-section-item" type="submit">Suchen</button>
             <button class="btn filter-bills-form-section-item" type="button" (click)="reset()">Zurücksetzen</button>
