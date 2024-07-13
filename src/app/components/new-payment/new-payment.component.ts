@@ -88,4 +88,8 @@ export class NewPaymentComponent implements OnInit {
 
     return result;
   }
+
+  getNow(): Date {
+    return new Date();
+  }
 }

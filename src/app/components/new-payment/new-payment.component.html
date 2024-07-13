@@ -1,48 +1,44 @@
-<div class="new-payment-container">
-    <p>Here you can create a new Payment</p>
-    
+<div class="new-payment-container form-style-3">
+
     <form class="post-payment-form" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+        <label for="field1">
+            <span>Gläubiger</span>
+            <input type="text" class="input-field" name="field1" value="" formControlName="creditor"/>
+        </label>
+        <label for="field2">
+            <span>Beschreibung</span>
+            <input type="text" class="input-field" name="field2" value="" formControlName="description"/>
+        </label>
+        <label for="field3">
+            <span>Preis</span>
+            <input type="text" class="input-field" name="field3" value="" formControlName="price"/>
+        </label>
+        <label for="field4">
+            <span>Rechnungsdatum</span>
+            <input type="date" class="input-field" name="field4" [valueAsDate]="getNow()" formControlName="paymentDate"/>
+        </label>
 
-        <div class="field">
-            <label class="label">Author</label>
-            <input type="text" class="input" formControlName="author">
-        </div>
-        <div class="field">
-            <label class="label">Creditor</label>
-            <input type="text" class="input" formControlName="creditor">
-        </div>
-        <div class="field">
-            <label class="label">Description</label>
-            <input type="text" class="input" formControlName="description">
-        </div>
-        <div class="field">
-            <label class="label">Date of Payment</label>
-            <input type="date" class="input" formControlName="paymentDate">
-        </div>
-        <div class="field">
-            <label class="label">Price</label>
-            <input type="number" class="input" formControlName="price">
-        </div>
+        <label for="field5">
+            <span>Verfasser</span>
+            <input type="text" class="input-field" name="field5" value="" formControlName="author"/>
+        </label>
         
-        <div formArrayName="debitors">
-            <label>Debitors</label>
-            <div 
-                *ngFor="let debitor of debitors.controls; let i = index" 
-                [formGroupName]="i"
-                class="debitor-container field">
-                <label>Debitor {{i+1}}</label>
-                <input formControlName="debitor" type="text" class="debitor-textfield">
-                <button (click)="removeDebitor(i)" class="button btn-remove-debitor" type="button">-</button>
+        <fieldset>
+            <legend>Liste der Schuldner</legend>
+            <input type="button" class="btn-add-debitor button" (click)="addDebitor()" value="Schuldner hinzufügen" />
+            <div formArrayName="debitors">            
+                <div *ngFor="let debitor of debitors.controls; let i = index" [formGroupName]="i">
+                    <label [htmlFor]="'debfield' + i">
+                        <span>Schuldner {{ i + 1 }}</span>
+                        <input type="text" class="input-field" [name]="'debfield' + i" value="" formControlName="debitor">
+                        <input (click)="removeDebitor(i)" type="button" value="Entfernen"/>
+                    </label>                
+                </div>
             </div>
-            <button type="button" class="btn-add-debitor button" (click)="addDebitor()">Add Debitor</button>
-        </div>
+        </fieldset>
 
-
-        <div>
-            <button class="btn-create-payment button" type="submit">Create Payment</button>
-        </div>
-
+        <label for="field6">
+            <input class="btn-create-payment button" type="submit" value="Rechnung erstellen" />
+        </label>
     </form>
-    {{ paymentForm.value | json }}
-
 </div>
