@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Kostenstelle Kranplatzverdichtung im Böhmerwald'
+  title = 'Pulverschnee und Sonnenschein,
+aufi, owi – so muaß es sein!
+Mit Schwung den Hang hinunterfliagn,
+Ski foan, Bier saufn, Leben gnießn!'
 }
