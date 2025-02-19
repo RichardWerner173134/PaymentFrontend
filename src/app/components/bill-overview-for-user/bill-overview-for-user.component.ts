@@ -1,13 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GetAllBillOverviewsResponse, GetBillOverviewsForUserResponse, GetUsersResponse, ShortBill, User } from '../../model/backend/InternalSwagger';
+import { User } from '../../model/backend/InternalSwagger';
 import { NgFor, CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule } from '@angular/router';
-import { usersSelector } from '../../state/selector/app.selector';
 import { map, Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { fetchUsersSuccess } from '../../state/action/app.action';
+import { UserService } from '../../services/user.service';
+import { BillOverviewService } from '../../services/bill.overview.service';
+import { InternalShortBill, InternalShortBillsForUser } from '../../model/internal/InternalShortBill';
 
 @Component({
   selector: 'app-bill-overview-for-user',
@@ -17,70 +16,59 @@ import { fetchUsersSuccess } from '../../state/action/app.action';
   styleUrl: './bill-overview-for-user.component.scss'
 })
 export class BillOverviewForUserComponent implements OnInit {
-  users$: Observable<User[]> = this.store.select(usersSelector);
-  url: string = "http://localhost:7066/api/";
-  usersPath: string = "users";
+  users$: Observable<User[]> = this.userService.getCachedUsers();
     
   billsForm: FormGroup = this.formBuilder.group({
     username: ''
   });
-  
-  bills: ShortBill[] = [];
+
+  bills$: Observable<InternalShortBill[]> = this.billOverviewService.getBillOverviews().pipe(map(data => data.bills));
   calculationTime?: Date;
   balance?: number;
 
-  billOverviewsUrl: string = "http://localhost:7066/api/bill-overviews";
-  billOverviewForUserUrl: string = "http://localhost:7066/api/bill-overviews/all/users/";
-
   constructor(
     private formBuilder: FormBuilder, 
-    private http: HttpClient,
-    private store: Store
+    private userService: UserService,
+    private billOverviewService: BillOverviewService
   ){}
 
-  ngOnInit(): void {
-    this.http.get<GetAllBillOverviewsResponse>(this.billOverviewsUrl)
-        .subscribe(data => {
-          this.bills = data.bills;
-          this.calculationTime = data.calculationTime;
-          this.balance = undefined;
-        });
-
-      this.users$.pipe(map(u => u.length > 0)).subscribe(data => {
-        console.log(data);
-        if(data === false) {
-          this.http.get<GetUsersResponse>(this.url + this.usersPath)
-          .subscribe(data => {
-            this.store.dispatch(fetchUsersSuccess({users: data.userList}));
-          });
-        }
-      });
-  }
+  ngOnInit(): void {}
  
   reset() {
     this.billsForm.reset();
-    this.bills = [];
     this.balance = undefined;
-    this.calculationTime = undefined;
+
+    let shortBills$ = this.billOverviewService.getBillOverviews();
+      
+    this.bills$ = shortBills$.pipe(map(data => data.bills));
+    shortBills$.subscribe(data => {
+      this.balance = undefined;
+      this.calculationTime = data.calculationTime;
+    })
   }
 
   onSubmit() {
     let username: string = this.billsForm.value.username;
-    
+
+    // all bill overviews
     if(username == '' || username == undefined){
-      this.http.get<GetAllBillOverviewsResponse>(this.billOverviewsUrl)
-        .subscribe(data => {
-          this.bills = data.bills;
-          this.calculationTime = data.calculationTime;
-          this.balance = undefined;
-        });
+      let shortBills$ = this.billOverviewService.getBillOverviews();
+      
+      this.bills$ = shortBills$.pipe(map(data => data.bills));
+      shortBills$.subscribe(data => {
+        this.balance = undefined;
+        this.calculationTime = data.calculationTime;
+      })
+
+    // bill overviews for user  
     } else {
-      this.http.get<GetBillOverviewsForUserResponse>(this.billOverviewForUserUrl + username.toLowerCase())
-        .subscribe(data => {
-          this.bills = data.bills;
-          this.calculationTime = data.calculationTime;
-          this.balance = data.balance;
-        });
+      let shortBillsForUser: Observable<InternalShortBillsForUser> = this.billOverviewService.getBillOverviewForUser(username.toLowerCase());
+      
+      this.bills$ = shortBillsForUser.pipe(map(data => data.bills));
+      shortBillsForUser.subscribe(data => {
+        this.balance = data.balance;
+        this.calculationTime = data.calculationTime;
+      });
     }
   }
 }

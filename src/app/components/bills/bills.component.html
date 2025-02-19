@@ -13,8 +13,7 @@
         </div>
     </form>
     
-    <p *ngIf="calculationTime">Berechnungszeitpunkt: {{ calculationTime }}</p>
-    <div *ngFor="let bill of bills;" class="bill-for-user">
+    <div *ngFor="let bill of bills$ | async" class="bill-for-user">
         <p>Gläubiger: {{ bill.issuedBy }}</p>
         <p>Schuldner: {{ bill.issuedFor }}</p>
         <p>Betrag: {{ bill.amount }}€</p>

@@ -31,5 +31,5 @@
         <p>Berechnungszeitpunkt: {{ calculationTime }}</p>
     </div>
 
-    <app-payments-table [payments]="payments"></app-payments-table>
+    <app-payments-table [payments]="(payments$ | async)"></app-payments-table>
 </div>

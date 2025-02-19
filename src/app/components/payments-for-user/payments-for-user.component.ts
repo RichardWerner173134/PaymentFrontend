@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { GetPaymentsForCreditorResponse, GetPaymentsForDebitorResponse, Payment, PostPaymentRequest } from '../../model/backend/InternalSwagger';
 import { CommonModule, NgFor } from '@angular/common';
-import { of } from 'rxjs';
 import { PaymentsTableComponent } from '../../shared/payments-table/payments-table.component';
+import { InternalPayment } from '../../model/internal/InternalPayment';
+import { map, Observable, of } from 'rxjs';
+import { PaymentService } from '../../services/payments.service';
 
 @Component({
   selector: 'app-payments-for-user',
@@ -15,23 +15,22 @@ import { PaymentsTableComponent } from '../../shared/payments-table/payments-tab
   styleUrl: './payments-for-user.component.scss'
 })
 export class PaymentsForUserComponent {
-  url: string = "http://localhost:7066/api/";
-  debitorPath: string = "payments-for-debitor/";
-  creditorPath: string = "payments-for-creditor/";
+  payments$: Observable<InternalPayment[]> = of();
 
   states: string[] = [
-    "Creditor",
-    "Debitor"
+    "Gläubiger",
+    "Schuldner"
   ];
 
   paymentFilter: FormGroup = this.formBuilder.group({
-    selection: this.formBuilder.nonNullable.control('Creditor'),
+    selection: this.formBuilder.nonNullable.control('Gläubiger'),
     username: ''
   });
 
-  payments: Payment[] = [];
-
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private formBuilder: FormBuilder, 
+    private paymentsService: PaymentService
+  ) {}
 
   onSubmit() {
     let selection: string = this.paymentFilter.value.selection;
@@ -41,18 +40,15 @@ export class PaymentsForUserComponent {
       return;
     }
 
-    if(selection == 'Creditor'){
-      this.http.get<GetPaymentsForCreditorResponse>(this.url + this.creditorPath + username.toLowerCase())
-        .subscribe(data => this.payments = data.payments);
-      
+    if(selection == 'Gläubiger'){
+      this.payments$ = this.paymentsService.getPaymentsForCreditor(username.toLowerCase()).pipe(map(data => data.payments));
     } else {
-      this.http.get<GetPaymentsForDebitorResponse>(this.url + this.debitorPath + username.toLowerCase())
-        .subscribe(data => this.payments = data.payments);
+      this.payments$ = this.paymentsService.getPaymentsForDebitor(username.toLowerCase()).pipe(map(data => data.payments));
     }
   }
 
   reset() {
     this.paymentFilter.reset();
-    this.payments = [];
+    this.payments$ = of();
   }
 }
