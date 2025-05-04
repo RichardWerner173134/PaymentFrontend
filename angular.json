@@ -23,12 +23,14 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/assets/beer.webp",
               "src/web.config"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "baseHref": "/"
           },
           "configurations": {
             "production": {
