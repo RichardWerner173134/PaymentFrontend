@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../model/backend/InternalSwagger';
 import { NgFor, CommonModule } from '@angular/common';
-import { RouterOutlet, RouterModule } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { RouterModule } from '@angular/router';
+import { filter, map, Observable, switchMap } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { BillOverviewService } from '../../services/bill.overview.service';
 import { InternalShortBill, InternalShortBillsForUser } from '../../model/internal/InternalShortBill';
+import { Store } from '@ngrx/store';
+import { selectedPaymentContextSelector } from '../../state/selector/app.selector';
 
 @Component({
   selector: 'app-bill-overview-for-user',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule],
+  imports: [ReactiveFormsModule, RouterModule, NgFor, CommonModule],
   templateUrl: './bill-overview-for-user.component.html',
   styleUrl: './bill-overview-for-user.component.scss'
 })
@@ -22,14 +24,19 @@ export class BillOverviewForUserComponent implements OnInit {
     username: ''
   });
 
-  bills$: Observable<InternalShortBill[]> = this.billOverviewService.getBillOverviews().pipe(map(data => data.bills));
+  bills$: Observable<InternalShortBill[]> = this.store.select(selectedPaymentContextSelector).pipe(
+    filter(selectedPaymentContext => selectedPaymentContext != null),
+    switchMap(selectedPaymentContext => this.billOverviewService.getBillOverviews(selectedPaymentContext!).pipe(map(data => data.bills))
+  ));
+
   calculationTime?: Date;
   balance?: number;
 
   constructor(
     private formBuilder: FormBuilder, 
     private userService: UserService,
-    private billOverviewService: BillOverviewService
+    private billOverviewService: BillOverviewService,
+    private store: Store
   ){}
 
   ngOnInit(): void {}
@@ -38,8 +45,11 @@ export class BillOverviewForUserComponent implements OnInit {
     this.billsForm.reset();
     this.balance = undefined;
 
-    let shortBills$ = this.billOverviewService.getBillOverviews();
-      
+    let shortBills$ = this.store.select(selectedPaymentContextSelector).pipe(
+      filter(selectedPaymentContext => selectedPaymentContext != null),
+      switchMap(selectedPaymentContext => this.billOverviewService.getBillOverviews(selectedPaymentContext!)
+    ));
+
     this.bills$ = shortBills$.pipe(map(data => data.bills));
     shortBills$.subscribe(data => {
       this.balance = undefined;
@@ -51,9 +61,12 @@ export class BillOverviewForUserComponent implements OnInit {
     let username: string = this.billsForm.value.username;
 
     // all bill overviews
-    if(username == '' || username == undefined){
-      let shortBills$ = this.billOverviewService.getBillOverviews();
-      
+    if(username == '' || username == undefined){      
+      let shortBills$ = this.store.select(selectedPaymentContextSelector).pipe(
+        filter(selectedPaymentContext => selectedPaymentContext != null),
+        switchMap(selectedPaymentContext => this.billOverviewService.getBillOverviews(selectedPaymentContext!)
+      ));
+
       this.bills$ = shortBills$.pipe(map(data => data.bills));
       shortBills$.subscribe(data => {
         this.balance = undefined;
@@ -62,7 +75,10 @@ export class BillOverviewForUserComponent implements OnInit {
 
     // bill overviews for user  
     } else {
-      let shortBillsForUser: Observable<InternalShortBillsForUser> = this.billOverviewService.getBillOverviewForUser(username.toLowerCase());
+      let shortBillsForUser: Observable<InternalShortBillsForUser> = this.store.select(selectedPaymentContextSelector).pipe(
+        filter(selectedPaymentContext => selectedPaymentContext != null),
+        switchMap(selectedPaymentContext => this.billOverviewService.getBillOverviewForUser(selectedPaymentContext!, username.toLowerCase())
+      ));
       
       this.bills$ = shortBillsForUser.pipe(map(data => data.bills));
       shortBillsForUser.subscribe(data => {

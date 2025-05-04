@@ -16,6 +16,12 @@ export interface GetUsersResponse {
     [key: string]: any;
 }
 
+export interface GetPaymentContextsResponse {
+    paymentContexts?: PaymentContext[];
+
+    [key: string]: any;
+}
+
 export interface GetPaymentsResponse {
     payments: Payment[];
 
@@ -54,6 +60,14 @@ export interface Payment {
     creditor: string;
     author: string;
     updateTime: Date;
+
+    [key: string]: any;
+}
+
+export interface PaymentContext {
+    id: number;
+    name: string;
+    isClosed: boolean;
 
     [key: string]: any;
 }

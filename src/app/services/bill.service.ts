@@ -16,10 +16,10 @@ export class BillService {
         private paymentBackendAuthService: PaymentBackendAuthService
     ){}
 
-    public getBills(): Observable<InternalAllBills>{
+    public getBills(selectedPaymentContext: number): Observable<InternalAllBills>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetAllBillsResponse>(pathBills, { params: options })
+            .get<GetAllBillsResponse>(pathBills(selectedPaymentContext), { params: options })
             .pipe(map(data => {
                 return {
                     bills: data.bills,
@@ -28,10 +28,10 @@ export class BillService {
             }));
     }
 
-    public getBillsForUser(username: string): Observable<InternalBillsForUser>{
+    public getBillsForUser(selectedPaymentContext: number, username: string): Observable<InternalBillsForUser>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetBillsForUserResponse>(pathBillsForUser + username, { params: options })
+            .get<GetBillsForUserResponse>(pathBillsForUser(selectedPaymentContext, username), { params: options })
             .pipe(map(data => {
                 return {
                     bills: data.bills,

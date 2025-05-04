@@ -1,11 +1,14 @@
-<ul class="navbar">
-    <li><a [routerLink]="['/home']">Startseite</a></li>
-    <li><a [routerLink]="['/payments/create']">Neue Rechnung</a></li>
-    <li><a [routerLink]="['/payments']">Rechnungen</a></li>
+<ul class="navbar" (click)="changeSelected($event)">
+    <li routerLinkActive="active"><a [routerLink]="['/home']">Startseite</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/payments/create']">Neue Rechnung</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/payments']">Rechnungen</a></li>
     <!--<li><a [routerLink]="['/payments-for-user']">Rechnungen filtern</a></li> vorerst nicht benötigt-->
-    <li><a [routerLink]="['/payment-overview-for-user']">Rechnungsübersicht</a></li>
-    <li><a [routerLink]="['/bills']">Quittungen</a></li>
-    <li><a [routerLink]="['/bills-overview-for-user']">Quittungsübersicht</a></li>
-    <li><a [routerLink]="['/users']">Nutzer</a></li>
-    <li><a [routerLink]="['/impressum']">Impressum</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/payment-overview-for-user']">Rechnungsübersicht</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/bills']">Quittungen</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/bills-overview-for-user']">Quittungsübersicht</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/users']">Nutzer</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/impressum']">Impressum</a></li>
+    <li>
+        <app-payment-context></app-payment-context>
+    </li>
 </ul>

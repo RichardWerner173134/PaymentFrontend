@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../model/backend/InternalSwagger';
 import { NgFor, CommonModule } from '@angular/common';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { PaymentsTableComponent } from "../../shared/payments-table/payments-table.component";
-import { map, Observable, of } from 'rxjs';
+import { map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { PaymentOverviewService } from '../../services/payment.overviews.service';
 import { InternalPayment } from '../../model/internal/InternalPayment';
 import { InternalPaymentOverviewForCreditor, InternalPaymentOverviewForDebitor } from '../../model/internal/InternalPaymentOverview';
+import { Store } from '@ngrx/store';
+import { selectedPaymentContextSelector } from '../../state/selector/app.selector';
 
 @Component({
   selector: 'app-payment-overview-for-user',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterOutlet, RouterModule, NgFor, CommonModule, PaymentsTableComponent],
+  imports: [ReactiveFormsModule, RouterModule, NgFor, CommonModule, PaymentsTableComponent],
   templateUrl: './payment-overview-for-user.component.html',
   styleUrl: './payment-overview-for-user.component.scss'
 })
@@ -39,7 +41,8 @@ export class PaymentOverviewForUserComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder, 
     private userService: UserService,
-    private paymentOverviewService: PaymentOverviewService
+    private paymentOverviewService: PaymentOverviewService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {}
@@ -53,7 +56,16 @@ export class PaymentOverviewForUserComponent implements OnInit{
     }
     
     if(selection == 'Gläubiger'){
-      let paymentOverview$: Observable<InternalPaymentOverviewForCreditor> = this.paymentOverviewService.getPaymentOverviewForCreditor(username.toLowerCase());
+      let paymentOverview$: Observable<InternalPaymentOverviewForCreditor> = this.store.select(selectedPaymentContextSelector).pipe(
+        mergeMap(selectedPaymentContextSelector => {
+          if (selectedPaymentContextSelector == null) {
+            throw new Error("Cant resolve without PaymentContext");
+          }
+
+          return this.paymentOverviewService.getPaymentOverviewForCreditor(selectedPaymentContextSelector, username.toLowerCase());
+        })
+      )
+      
 
       this.payments$ = paymentOverview$.pipe(map(data => data.payments));
       paymentOverview$.subscribe(data => {
@@ -65,8 +77,16 @@ export class PaymentOverviewForUserComponent implements OnInit{
       });
 
     } else {
-      let paymentOverview$: Observable<InternalPaymentOverviewForDebitor> = this.paymentOverviewService.getPaymentOverviewForDebitor(username.toLowerCase());
+      let paymentOverview$: Observable<InternalPaymentOverviewForDebitor> = this.store.select(selectedPaymentContextSelector).pipe(
+        switchMap(selectedPaymentContextSelector => {
+          if (selectedPaymentContextSelector == null) {
+            throw new Error("Cant resolve without PaymentContext");
+          }
 
+          return this.paymentOverviewService.getPaymentOverviewForDebitor(selectedPaymentContextSelector, username.toLowerCase());
+        })
+      )
+      
       this.payments$ = paymentOverview$.pipe(map(data => data.payments));
       paymentOverview$.subscribe(data => {
         this.calculationTime = data.calculationTime;

@@ -16,10 +16,10 @@ export class PaymentService {
         private paymentBackendAuthService: PaymentBackendAuthService
     ){}
   
-    public getPayments(): Observable<InternalAllPayments>{
+    public getPayments(selectedPaymentContext: number): Observable<InternalAllPayments>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetPaymentsResponse>(pathPayments, { params: options })
+            .get<GetPaymentsResponse>(pathPayments(selectedPaymentContext), { params: options })
             .pipe(map(data => {
                 return {
                     payments: data.payments
@@ -27,19 +27,19 @@ export class PaymentService {
             })); 
     }
 
-    public postPayment(body: any): Observable<Object> {
+    public postPayment(selectedPaymentContext: number, body: any): Observable<Object> {
         let options = this.paymentBackendAuthService.getOptions();
         return this.http.post(
-            pathPayments, 
+            pathPayments(selectedPaymentContext), 
             body,
             {params: options}
         );
     }
 
-    public getPaymentById(paymentId: number): Observable<InternalPaymentsById>{
+    public getPaymentById(selectedPaymentContext: number, paymentId: number): Observable<InternalPaymentsById>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetPaymentsByIdResponse>(pathPaymentById + paymentId, { params: options })
+            .get<GetPaymentsByIdResponse>(pathPaymentById(selectedPaymentContext, paymentId), { params: options })
             .pipe(map(data => {
                 return {
                     payments: data.payments
@@ -47,17 +47,17 @@ export class PaymentService {
             })); 
     }
 
-    public deletePaymentById(paymentId: number): void{
+    public deletePaymentById(selectedPaymentContext: number, paymentId: number): void{
         let options = this.paymentBackendAuthService.getOptions();
         this.http
-            .delete(pathPaymentById + paymentId, { params: options })
+            .delete(pathPaymentById(selectedPaymentContext, paymentId), { params: options })
             .subscribe(() => window.location.reload());
     }
 
-    public getPaymentsForCreditor(username: string): Observable<InternalPaymentsForCreditor>{
+    public getPaymentsForCreditor(selectedPaymentContext: number, username: string): Observable<InternalPaymentsForCreditor>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetPaymentsForCreditorResponse>(pathPaymentsForCreditor + username, { params: options })
+            .get<GetPaymentsForCreditorResponse>(pathPaymentsForCreditor(selectedPaymentContext, username), { params: options })
             .pipe(map(data => {
                 return {
                     payments: data.payments
@@ -65,10 +65,10 @@ export class PaymentService {
             })); 
     }
 
-    public getPaymentsForDebitor(username: string): Observable<InternalPaymentsForDebitor>{
+    public getPaymentsForDebitor(selectedPaymentContext: number, username: string): Observable<InternalPaymentsForDebitor>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetPaymentsForDebitorResponse>(pathPaymentsForDebitor + username, { params: options })
+            .get<GetPaymentsForDebitorResponse>(pathPaymentsForDebitor(selectedPaymentContext, username), { params: options })
             .pipe(map(data => {
                 return {
                     payments: data.payments
@@ -76,10 +76,10 @@ export class PaymentService {
             })); 
     }
 
-    public getPaymentsForAuthor(username: string): Observable<InternalPaymentsForDebitor>{
+    public getPaymentsForAuthor(selectedPaymentContext: number, username: string): Observable<InternalPaymentsForDebitor>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetPaymentsForAuthorResponse>(pathPaymentsForAuthor + username, { params: options })
+            .get<GetPaymentsForAuthorResponse>(pathPaymentsForAuthor(selectedPaymentContext, username), { params: options })
             .pipe(map(data => {
                 return {
                     payments: data.payments

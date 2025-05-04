@@ -1,0 +1,7 @@
+<select (change)="onChange($event)" class="dropdown-selection">
+    <option 
+        *ngFor="let paymentContext of paymentContexts | async"
+        [ngValue]="paymentContext.id">
+        {{paymentContext.name}}{{paymentContext.isClosed ? ' (closed)' : ''}}
+    </option>
+</select>

@@ -17,3 +17,13 @@ export const paymentsSelector = createSelector(
     selectAppState,
     (state: AppState) => state.payments
 );
+
+export const paymentContextsSelector = createSelector(
+    selectAppState,
+    (state: AppState) => state.paymentContexts
+);
+
+export const selectedPaymentContextSelector = createSelector(
+    selectAppState,
+    (state: AppState) => state.selectedPaymentContext
+);

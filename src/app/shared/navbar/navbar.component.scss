@@ -4,24 +4,34 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: rgb(25, 9, 83);
+    display: flex;
 }
 
 li {
-    float: left;
+    padding: 14px 16px;
+    align-items: center;
+    display: flex;
 }
 
 li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
 }
 
 li a:hover {
     background-color: rgb(48, 29, 116);
 }
 
-.active {
-    background-color: rgb(108, 104, 122);
+.navbar li a.active,
+.navbar li.active a {
+    background-color: rgb(160, 152, 190);
+    color: rgb(25, 9, 83);
 }
