@@ -1,10 +1,15 @@
+@use '../../styles/colors' as *;
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(25, 9, 83);
+    background-color: $accent-color;
     display: flex;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: bold;
+	font-size: 14px;
 }
 
 li {
@@ -15,7 +20,7 @@ li {
 
 li a {
     display: block;
-    color: white;
+    color: $text-color;
     text-align: center;
     text-decoration: none;
     padding: 10px 15px;
@@ -27,11 +32,11 @@ li a {
 }
 
 li a:hover {
-    background-color: rgb(48, 29, 116);
+    background-color: $secondary-background-color;
 }
 
 .navbar li a.active,
 .navbar li.active a {
-    background-color: rgb(160, 152, 190);
-    color: rgb(25, 9, 83);
+    background-color: $primary-background-color;
+    color: $text-color;
 }

@@ -18,7 +18,7 @@ export const pathPayments = (selectedPaymentContext: number): string => {
 }
     
 export const pathPaymentById = (selectedPaymentContext: number, paymentId: number): string => {
-    return pathPaymentContextById(selectedPaymentContext) + paymentId;
+    return pathPayments(selectedPaymentContext) +  "/" +paymentId;
 } 
 
 export const pathPaymentsForCreditor = (selectedPaymentContext: number, creditorUsername: string): string => {

@@ -4,7 +4,7 @@ import { User } from '../../model/backend/InternalSwagger';
 import { NgFor, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PaymentsTableComponent } from "../../shared/payments-table/payments-table.component";
-import { map, mergeMap, Observable, of, switchMap } from 'rxjs';
+import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { PaymentOverviewService } from '../../services/payment.overviews.service';
 import { InternalPayment } from '../../model/internal/InternalPayment';
@@ -56,45 +56,32 @@ export class PaymentOverviewForUserComponent implements OnInit{
     }
     
     if(selection == 'Gläubiger'){
-      let paymentOverview$: Observable<InternalPaymentOverviewForCreditor> = this.store.select(selectedPaymentContextSelector).pipe(
-        mergeMap(selectedPaymentContextSelector => {
-          if (selectedPaymentContextSelector == null) {
-            throw new Error("Cant resolve without PaymentContext");
-          }
-
-          return this.paymentOverviewService.getPaymentOverviewForCreditor(selectedPaymentContextSelector, username.toLowerCase());
-        })
+      this.payments$ = this.store.select(selectedPaymentContextSelector).pipe(
+        filter(selectedPaymentContextSelector => selectedPaymentContextSelector != null),
+        switchMap(selectedPaymentContextSelector => this.paymentOverviewService.getPaymentOverviewForCreditor(selectedPaymentContextSelector!, username.toLowerCase()).pipe(
+          tap(data => {
+            this.calculationTime = data.calculationTime;
+            this.totalWithCreditor = data.totalWithCreditor;
+            this.totalWithoutCreditor = data.totalWithoutCreditor;
+            this.totalDebitorOnly = undefined;
+          }),
+          map(data => data.payments)
+        ))
       )
-      
-
-      this.payments$ = paymentOverview$.pipe(map(data => data.payments));
-      paymentOverview$.subscribe(data => {
-        this.calculationTime = data.calculationTime;
-        this.totalWithCreditor = data.totalWithCreditor;
-        this.totalWithoutCreditor = data.totalWithoutCreditor;
-
-        this.totalDebitorOnly = undefined;
-      });
-
     } else {
-      let paymentOverview$: Observable<InternalPaymentOverviewForDebitor> = this.store.select(selectedPaymentContextSelector).pipe(
-        switchMap(selectedPaymentContextSelector => {
-          if (selectedPaymentContextSelector == null) {
-            throw new Error("Cant resolve without PaymentContext");
-          }
+      this.payments$ = this.store.select(selectedPaymentContextSelector).pipe(
+        filter(selectedPaymentContextSelector => selectedPaymentContextSelector != null),
+        switchMap(selectedPaymentContextSelector => this.paymentOverviewService.getPaymentOverviewForDebitor(selectedPaymentContextSelector!, username.toLowerCase()).pipe(
+          tap(data => {
+            this.calculationTime = data.calculationTime;
+            this.totalDebitorOnly = data.totalDebitorOnly;
 
-          return this.paymentOverviewService.getPaymentOverviewForDebitor(selectedPaymentContextSelector, username.toLowerCase());
-        })
-      )
-      
-      this.payments$ = paymentOverview$.pipe(map(data => data.payments));
-      paymentOverview$.subscribe(data => {
-        this.calculationTime = data.calculationTime;
-        this.totalDebitorOnly = data.totalDebitorOnly;
-
-        this.totalWithCreditor = undefined;
-        this.totalWithoutCreditor = undefined;
-      })
+            this.totalWithCreditor = undefined;
+            this.totalWithoutCreditor = undefined;
+          }),
+          map(data => data.payments)
+        ))
+      );
     }
   }
 

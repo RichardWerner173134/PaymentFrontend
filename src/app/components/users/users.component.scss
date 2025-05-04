@@ -1,3 +1,5 @@
+@use '../../styles/colors' as *;
+
 .search {
     margin: 10px;
     height: 1cm;
@@ -11,10 +13,18 @@
     align-items: center;
 }
 
-.btn-reset{
-    width: 20%;
-    margin-left: 10px;
-    margin-right: 10px;
-    height: 35px;
-    background-color:rgb(160, 152, 190);
+.btn {
+    padding: 0.6rem 1.2rem;
+    background-color: $primary-button-color;
+    color: $primary-background-color;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: $primary-button-color-hover;
 }

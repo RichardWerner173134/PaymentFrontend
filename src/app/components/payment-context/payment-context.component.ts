@@ -17,6 +17,7 @@ import { PaymentContext } from "../../model/backend/InternalSwagger";
   })
   export class PaymentContextComponent implements OnInit{
     protected paymentContexts: Observable<PaymentContext[]> = this.store.select(paymentContextsSelector);
+    selectedContextId!: number;
 
     constructor(
       protected store: Store

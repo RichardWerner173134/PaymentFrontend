@@ -47,11 +47,11 @@ export class PaymentService {
             })); 
     }
 
-    public deletePaymentById(selectedPaymentContext: number, paymentId: number): void{
+    public deletePaymentById(selectedPaymentContext: number, paymentId: number): Observable<Object>{
         let options = this.paymentBackendAuthService.getOptions();
-        this.http
-            .delete(pathPaymentById(selectedPaymentContext, paymentId), { params: options })
-            .subscribe(() => window.location.reload());
+        return this.http
+            .delete(pathPaymentById(selectedPaymentContext, paymentId), { params: options });
+            //.subscribe(() => window.location.reload());
     }
 
     public getPaymentsForCreditor(selectedPaymentContext: number, username: string): Observable<InternalPaymentsForCreditor>{

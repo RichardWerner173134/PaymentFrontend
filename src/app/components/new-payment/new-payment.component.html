@@ -29,16 +29,15 @@
         <fieldset>
             <legend>Liste der Schuldner</legend>
             <input type="button" class="btn-add-debitor button" (click)="addDebitor()" value="Schuldner hinzufügen" />
-            <div formArrayName="debitors">            
-                <div *ngFor="let debitor of debitors.controls; let i = index" [formGroupName]="i">
-                    <label [htmlFor]="'debfield' + i">
-                        <span>Schuldner {{ i + 1 }}</span>
-                        <input type="text" class="input-field" [name]="'debfield' + i" value="" formControlName="debitor" list="suggestions">
-                        <input (click)="removeDebitor(i)" type="button" value="Entfernen"/>
-                    </label>                
-                </div>
+          
+            <div formArrayName="debitors">
+              <div *ngFor="let debitor of debitorControls; let i = index" [formGroupName]="i" class="debitor-row" >
+                <input type="text" class="input-field" [name]="'debfield' + i" formControlName="debitor" list="suggestions" />
+                <input type="button" value="Entfernen" (click)="removeDebitor(i)" />
+              </div>
             </div>
-        </fieldset>
+          </fieldset>
+          
 
         <label for="field6">
             <input class="btn-create-payment button" type="submit" value="Rechnung erstellen" />

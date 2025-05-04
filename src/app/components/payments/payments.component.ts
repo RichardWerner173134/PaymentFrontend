@@ -27,4 +27,11 @@ export class PaymentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  refresh(): void {
+    this.payments$ = this.store.select(selectedPaymentContextSelector).pipe(
+      filter(selectedPaymentContextSelector => selectedPaymentContextSelector != null),
+      switchMap(selectedPaymentContext => this.paymentService.getPayments(selectedPaymentContext!).pipe(map(data => data.payments)))
+    );
+  }
 }

@@ -1,27 +1,33 @@
+@use '../../styles/colors' as *;
 
 table {
 	border-collapse: collapse;
     font-family: Tahoma, Geneva, sans-serif;
 }
+
 table td {
 	padding: 15px;
 }
+
 table thead td {
-    background-color: rgb(160, 152, 190);
-	color: black;
+    background-color: $primary-color;
+	color: $text-color;
 	font-weight: bold;
 	font-size: 13px;
-	border: 1px solid #54585d;
+	border: 1px solid $border-color;
 }
+
 table tbody td {
-	color: #636363;
-	border: 1px solid #dddfe1;
+	color: $text-color;
+	border: 1px solid $primary-background-color;
 }
+
 table tbody tr {
-	background-color: #f9fafb;
+	background-color: $accent-color;
 }
+
 table tbody tr:nth-child(odd) {
-	background-color: #ffffff;
+	background-color: lighten($accent-color, 10%);
 }
 
 .col-creditor {
@@ -54,5 +60,16 @@ table tbody tr:nth-child(odd) {
 
 .btn {
     height: 35px;
-    background-color:rgb(160, 152, 190);
+    background-color: $secondary-button-color;
+    color: $text-color;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    height: 35px;
+    background-color:$primary-button-color-hover;
 }

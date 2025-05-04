@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../model/backend/InternalSwagger';
 import { NgFor, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { filter, map, Observable, switchMap } from 'rxjs';
+import { filter, map, Observable, switchMap, tap } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { BillOverviewService } from '../../services/bill.overview.service';
 import { InternalShortBill, InternalShortBillsForUser } from '../../model/internal/InternalShortBill';
@@ -62,29 +62,29 @@ export class BillOverviewForUserComponent implements OnInit {
 
     // all bill overviews
     if(username == '' || username == undefined){      
-      let shortBills$ = this.store.select(selectedPaymentContextSelector).pipe(
+      this.bills$ = this.store.select(selectedPaymentContextSelector).pipe(
         filter(selectedPaymentContext => selectedPaymentContext != null),
-        switchMap(selectedPaymentContext => this.billOverviewService.getBillOverviews(selectedPaymentContext!)
+        switchMap(selectedPaymentContext => this.billOverviewService.getBillOverviews(selectedPaymentContext!).pipe(
+          tap(data => {
+            this.balance = undefined;
+            this.calculationTime = data.calculationTime;
+          }),
+          map(data => data.bills)
+        )
       ));
-
-      this.bills$ = shortBills$.pipe(map(data => data.bills));
-      shortBills$.subscribe(data => {
-        this.balance = undefined;
-        this.calculationTime = data.calculationTime;
-      })
 
     // bill overviews for user  
     } else {
-      let shortBillsForUser: Observable<InternalShortBillsForUser> = this.store.select(selectedPaymentContextSelector).pipe(
+      this.bills$ = this.store.select(selectedPaymentContextSelector).pipe(
         filter(selectedPaymentContext => selectedPaymentContext != null),
-        switchMap(selectedPaymentContext => this.billOverviewService.getBillOverviewForUser(selectedPaymentContext!, username.toLowerCase())
+        switchMap(selectedPaymentContext => this.billOverviewService.getBillOverviewForUser(selectedPaymentContext!, username.toLowerCase()).pipe(
+          tap(data => {
+            this.balance = data.balance;
+            this.calculationTime = data.calculationTime;
+          }),
+          map(data => data.bills)
+        )
       ));
-      
-      this.bills$ = shortBillsForUser.pipe(map(data => data.bills));
-      shortBillsForUser.subscribe(data => {
-        this.balance = data.balance;
-        this.calculationTime = data.calculationTime;
-      });
     }
   }
 }

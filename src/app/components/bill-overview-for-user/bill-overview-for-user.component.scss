@@ -1,12 +1,12 @@
+@use '../../styles/_colors.scss' as *;
+
 .filter-bills-form {
     display: flex;
     flex-direction: column;
-
     margin-top: 50px;
     margin-bottom: 50px;
-
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
 }
 
 .filter-bills-form-section {
@@ -18,8 +18,19 @@
 }
 
 .btn {
-    height: 35px;
-    background-color:rgb(160, 152, 190);
+    padding: 0.6rem 1.2rem;
+    background-color: $primary-button-color;
+    color: $primary-background-color;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: $primary-button-color-hover;
 }
 
 .filter-bills-form-section-item {
@@ -30,63 +41,28 @@
 
 .search-bar {
     height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid $border-color;
+    background-color: $primary-background-color;
+    color: $text-color;
 }
-
-
 
 .bill-for-user {
-    border: 1px solid black;
+    border: 1px solid $border-color;
     margin: 15px;
-    padding: 15px
+    padding: 15px;
+    background-color: $primary-background-color;
+    border-radius: 5px;
 }
 
-table {
-	border-collapse: collapse;
-    font-family: Tahoma, Geneva, sans-serif;
-}
-table td {
-	padding: 15px;
-}
-table thead td {
-    background-color: rgb(160, 152, 190);
-	color: black;
-	font-weight: bold;
-	font-size: 13px;
-	border: 1px solid #54585d;
-}
-table tbody td {
-	color: #636363;
-	border: 1px solid #dddfe1;
-}
-table tbody tr {
-	background-color: #f9fafb;
-}
-table tbody tr:nth-child(odd) {
-	background-color: #ffffff;
-}
-
-.col-creditor {
-    width: 200px;    
-}
-
-.col-price {
-    width: 200px;    
-}
-
-.col-paymentdate {
-    width: 200px;    
-}
-
-.col-description {
-    width: 200px;    
-}
-
-.col-debitors {
-    width: 200px;    
-}
-
+.col-creditor,
+.col-price,
+.col-paymentdate,
+.col-description,
+.col-debitors,
 .col-author {
-    width: 200px;    
+    width: 200px;
 }
 
 .bill-composite-container {
