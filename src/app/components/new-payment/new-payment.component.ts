@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,  } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
@@ -6,7 +5,6 @@ import { PostPaymentRequest, User } from '../../model/backend/InternalSwagger';
 import { CommonModule, NgFor } from '@angular/common';
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { hostKey, pathPayments } from '../../constants/backend.paths';
 import { __param } from 'tslib';
 import { PaymentService } from '../../services/payments.service';
 
@@ -24,7 +22,7 @@ export class NewPaymentComponent implements OnInit {
     author: '',
     creditor: '',
     description: '',
-    paymentDate: [new Date(2024, 1, 1, 10, 0, 0, 0), Validators.required],
+    paymentDate: [new Date(), Validators.required],
     price: 1.00,
     debitors: this.formBuilder.array([
       this.formBuilder.group({
@@ -36,7 +34,6 @@ export class NewPaymentComponent implements OnInit {
 
   
   constructor(
-    private http: HttpClient, 
     private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
