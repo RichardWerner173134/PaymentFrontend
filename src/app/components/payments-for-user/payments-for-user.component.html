@@ -13,5 +13,5 @@
         </div>
     </form>
 
-    <app-payments-table [withDelete]="false" [payments]="payments"></app-payments-table>
+    <app-payments-table [withDelete]="false" [payments]="payments$ | async"></app-payments-table>
 </div>

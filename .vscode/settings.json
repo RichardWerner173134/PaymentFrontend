@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d40c1b45-2512-4210-b7ae-84947aadf232/resourceGroups/rw-payment-app/providers/Microsoft.Web/sites/Rw-Payment-App",
+    "appService.deploySubpath": "dist\\payment-frontend\\browser"
+}

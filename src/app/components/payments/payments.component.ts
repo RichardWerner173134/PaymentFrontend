@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { paymentsSelector } from '../../state/selector/app.selector';
-import { fetchPaymentsSuccess } from '../../state/action/app.action';
+import { map, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { GetPaymentsResponse, Payment } from '../../model/backend/InternalSwagger';
 import { PaymentsTableComponent } from "../../shared/payments-table/payments-table.component";
+import { PaymentService } from '../../services/payments.service';
+import { InternalPayment } from '../../model/internal/InternalPayment';
 
 @Component({
   selector: 'app-payments',
@@ -17,18 +14,11 @@ import { PaymentsTableComponent } from "../../shared/payments-table/payments-tab
 })
 export class PaymentsComponent implements OnInit {
 
-  payments$: Observable<Payment[]> = this.store.select(paymentsSelector);
+  payments$: Observable<InternalPayment[]> = this.paymentService.getPayments().pipe(map(data => data.payments));
 
-  payments: Payment[] = [];
+  constructor(
+    private paymentService: PaymentService
+  ) {}
 
-  constructor(private http: HttpClient, private store: Store) {}
-
-  ngOnInit(): void {
-    this.http.get<GetPaymentsResponse>("http://localhost:7066/api/payments")
-      .subscribe(data => {
-        this.store.dispatch(fetchPaymentsSuccess({ payments: data.payments }));
-        this.payments = data.payments;
-      }
-    );    
-  }
+  ngOnInit(): void {}
 }

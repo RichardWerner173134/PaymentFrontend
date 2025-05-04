@@ -1,8 +1,7 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Payment } from '../../model/backend/InternalSwagger';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { InternalPayment } from '../../model/internal/InternalPayment';
+import { PaymentService } from '../../services/payments.service';
 
 @Component({
   selector: 'app-payments-table',
@@ -12,21 +11,18 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './payments-table.component.scss'
 })
 export class PaymentsTableComponent {
-  deletePaymentUrl: string = "http://localhost:7066/api/payments/";
-
   @Input()
-  payments: Payment[] | undefined;
+  payments: InternalPayment[] | null = [];
 
   @Input()
   withDelete: boolean = false;
 
-  constructor(private http: HttpClient){}
+  constructor(
+    private paymentService: PaymentService
+  ){}
 
   deletePayment(paymentId: number): void {
-    this.http.delete(this.deletePaymentUrl + paymentId)
-      .subscribe(data => {
-        window.location.reload();
-      });
+    this.paymentService.deletePaymentById(paymentId);
   }
 
 }

@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable, filter, map } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { HttpClient } from '@angular/common/http';
-import { usersSelector } from '../../state/selector/app.selector';
-import { fetchUsersSuccess } from '../../state/action/app.action';
+import { Observable } from 'rxjs';
 import { UserCardComponent } from './user-card/user-card.component';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { GetUsersResponse, User } from '../../model/backend/InternalSwagger';
+import { User } from '../../model/backend/InternalSwagger';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -16,33 +13,20 @@ import { GetUsersResponse, User } from '../../model/backend/InternalSwagger';
   styleUrl: './users.component.scss'
 })
 export class UsersComponent {
-  users$: Observable<User[]> = this.store.select(usersSelector);
-  url: string = "http://localhost:7066/api/";
-  usersPath: string = "users";
+  users$: Observable<User[]> = this.userService.getCachedUsers();
 
   searchedUsers: User[] | undefined = undefined;
 
-  constructor(private readonly store:Store, private http:HttpClient) {}
+  constructor(
+    private userService: UserService
+  ) {}
 
-  ngOnInit(): void {
-    this.users$.pipe(map(u => u.length > 0)).subscribe(data => {
-      console.log(data);
-      if(data === false) {
-        this.http.get<GetUsersResponse>(this.url + this.usersPath)
-        .subscribe(data => {
-          this.store.dispatch(fetchUsersSuccess({users: data.userList}));
-        });
-      }
-    });
-  }
+  ngOnInit(): void {}
 
   search($event: any) {
-    console.log("suchen nach nutzer " + $event.target.value);
-
-    this.store.select(usersSelector)
-      .subscribe(users => {
+    this.users$.subscribe(users => {
         this.searchedUsers = users.filter(user => this.lookup($event.target.value, user));
-      });
+    });
   }
 
   reset() {
