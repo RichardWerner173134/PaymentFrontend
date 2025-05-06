@@ -1,9 +1,11 @@
+@use '../../styles/colors' as *;
+
 .footer{
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgb(94, 89, 89);
-    color: white;
+    background-color: $secondary-color;
+    color: $text-color;
     text-align: center;
 }

@@ -1,0 +1,8 @@
+@use '../../styles/colors' as *;
+
+.dropdown-selection {
+    height: 35px;
+    width: 200px;
+    color: $text-color;
+    background-color: $secondary-background-color;
+}

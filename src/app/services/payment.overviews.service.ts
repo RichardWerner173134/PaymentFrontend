@@ -16,10 +16,10 @@ export class PaymentOverviewService {
         private paymentBackendAuthService: PaymentBackendAuthService
     ){}
     
-    public getPaymentOverviewForCreditor(username: string): Observable<InternalPaymentOverviewForCreditor>{
+    public getPaymentOverviewForCreditor(selectedPaymentContext: number, username: string): Observable<InternalPaymentOverviewForCreditor>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetPaymentOverviewForCreditorResponse>(pathPaymentOverviewForCreditor + username, { params: options })
+            .get<GetPaymentOverviewForCreditorResponse>(pathPaymentOverviewForCreditor(selectedPaymentContext, username), { params: options })
             .pipe(map(data => {
                 return {
                     payments: data.payments,
@@ -30,10 +30,10 @@ export class PaymentOverviewService {
             })); 
     }
 
-    public getPaymentOverviewForDebitor(username: string): Observable<InternalPaymentOverviewForDebitor>{
+    public getPaymentOverviewForDebitor(selectedPaymentContext: number, username: string): Observable<InternalPaymentOverviewForDebitor>{
         let options = this.paymentBackendAuthService.getOptions();
         return this.http
-            .get<GetPaymentOverviewForDebitorResponse>(pathPaymentOverviewForDebitor + username, { params: options })
+            .get<GetPaymentOverviewForDebitorResponse>(pathPaymentOverviewForDebitor(selectedPaymentContext, username), { params: options })
             .pipe(map(data => {
                 return {
                     payments: data.payments,

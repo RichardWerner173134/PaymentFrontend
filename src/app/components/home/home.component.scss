@@ -1,3 +1,5 @@
+@use '../../styles/colors' as *;
+
 .stretched-link::after{
   position:absolute;
   top:0;
@@ -7,7 +9,8 @@
   z-index:1;
   pointer-events:auto;
   content:"";
-  background-color:rgba(0,0,0,0)}
+  background-color:rgba(0,0,0,0)
+}
 
 * {
   box-sizing: border-box;
@@ -37,10 +40,10 @@ li {
   max-width: 45rem;
   margin: 2rem auto;
   padding: 2rem 1rem 1rem;
-  box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0.1rem 0.1rem 1.5rem $secondary-background-color;
   border-radius: 0.25rem;
   overflow: hidden;
-  background-color: white;
+  background-color: $primary-background-color;
 }
 
 li::before {
@@ -54,13 +57,6 @@ li::before {
   background: linear-gradient(to right, var(--c1) var(--stop), var(--c2) var(--stop));
 }
 
-h3 {
-  display: flex;
-  align-items: baseline;
-  margin: 0 0 1rem;
-  color: rgb(70 70 70);
-}
-
 h3::before {
   display: flex;
   justify-content: center;
@@ -72,7 +68,7 @@ h3::before {
   content: counter(list);
   padding: 1rem;
   border-radius: 50%;
-  background-color: rgb(151, 108, 34);
+  background-color: $secondary-color;
   color: white;
 }
 

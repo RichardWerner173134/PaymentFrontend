@@ -1,3 +1,5 @@
+@use '../../styles/colors' as *;
+
 .filter-payments-form {
     display: flex;
     flex-direction: column;
@@ -5,8 +7,8 @@
     margin-top: 50px;
     margin-bottom: 50px;
 
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
 }
 
 .filter-payments-form-section {
@@ -17,9 +19,39 @@
     justify-content: space-evenly;
 }
 
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: $primary-background-color;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus {
+  border-color: $primary-button-color-hover;
+  outline: auto;
+  background-color: $primary-background-color;
+}
+
+
 .btn {
-    height: 35px;
-    background-color:rgb(160, 152, 190);
+    padding: 0.6rem 1.2rem;
+    background-color: $primary-button-color;
+    color: $primary-background-color;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: $primary-button-color-hover;
 }
 
 .filter-payments-form-section-item {
@@ -33,32 +65,11 @@
 }
 
 .usertype-selection {
-    height: 35px;
-}
-
-table {
-	border-collapse: collapse;
-    font-family: Tahoma, Geneva, sans-serif;
-}
-table td {
-	padding: 15px;
-}
-table thead td {
-    background-color: rgb(160, 152, 190);
-	color: black;
-	font-weight: bold;
-	font-size: 13px;
-	border: 1px solid #54585d;
-}
-table tbody td {
-	color: #636363;
-	border: 1px solid #dddfe1;
-}
-table tbody tr {
-	background-color: #f9fafb;
-}
-table tbody tr:nth-child(odd) {
-	background-color: #ffffff;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: $primary-background-color;
 }
 
 .col-creditor {

@@ -1,10 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
 import { AppState } from "../app.state";
-import { fetchPaymentsSuccess, fetchUsersSuccess } from "../action/app.action";
+import { fetchPaymentContexts, fetchPaymentContextsSuccess, fetchPaymentsSuccess, fetchUsersSuccess, setSelectedPaymentContext } from "../action/app.action";
 
 export const initialState: AppState = {
     users: [],
-    payments: []
+    payments: [],
+    paymentContexts: [],
+    selectedPaymentContext: undefined
 }
 
 export const apiReducer = createReducer(
@@ -19,6 +21,20 @@ export const apiReducer = createReducer(
     on(fetchPaymentsSuccess, (state, action) => ({
         ...state,
         payments: action.payments
+    })),
+
+    on(fetchPaymentContexts, (state, action) => ({
+        ...state
+    })),
+
+    on(fetchPaymentContextsSuccess, (state, action) => ({
+        ...state,
+        paymentContexts: action.paymentContexts
+    })),
+
+    on(setSelectedPaymentContext, (state, action) => ({
+        ...state,
+        selectedPaymentContext: action.selectedPaymentContext
     }))
 );
 

@@ -18,6 +18,10 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { PaymentOverviewForUserComponent } from "./components/payment-overview-for-user/payment-overview-for-user.component";
 import { BillsComponent } from "./components/bills/bills.component";
 import { BillOverviewForUserComponent } from "./components/bill-overview-for-user/bill-overview-for-user.component";
+import { EffectsModule } from "@ngrx/effects";
+import { PaymentEffects } from "./state/effects/effects";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -43,6 +47,9 @@ const routes: Routes = [
         NavbarComponent,
         FooterComponent,
         StoreModule.forRoot({ appState: apiReducer }),
+        EffectsModule.forRoot([PaymentEffects]),
+        MatSnackBarModule,
+        BrowserAnimationsModule,
         NgFor,
         CommonModule,
         ReactiveFormsModule, 

@@ -1,3 +1,5 @@
+@use '../../styles/_colors.scss' as *; // Importiere die Farbvariablen
+
 .filter-bills-form {
     display: flex;
     flex-direction: column;
@@ -5,8 +7,8 @@
     margin-top: 50px;
     margin-bottom: 50px;
 
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
 }
 
 .filter-bills-form-section {
@@ -18,8 +20,19 @@
 }
 
 .btn {
-    height: 35px;
-    background-color:rgb(160, 152, 190);
+    padding: 0.6rem 1.2rem;
+    background-color: $primary-button-color;
+    color: $primary-background-color;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: $primary-button-color-hover;
 }
 
 .filter-bills-form-section-item {
@@ -29,40 +42,49 @@
 }
 
 .search-bar {
-    height: 30px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: $primary-background-color;
 }
 
-
-
 .bill-for-user {
-    border: 1px solid black;
+    border: 1px solid $border-color;
     margin: 15px;
-    padding: 15px
+    padding: 15px;
+    background-color: $primary-background-color;
+    border-radius: 5px;
 }
 
 table {
 	border-collapse: collapse;
     font-family: Tahoma, Geneva, sans-serif;
 }
+
 table td {
 	padding: 15px;
 }
+
 table thead td {
-    background-color: rgb(160, 152, 190);
-	color: black;
+    background-color: $primary-color;
+	color: $text-color;
 	font-weight: bold;
 	font-size: 13px;
-	border: 1px solid #54585d;
+	border: 1px solid $border-color;
 }
+
 table tbody td {
 	color: #636363;
-	border: 1px solid #dddfe1;
+	border: 1px solid $primary-background-color;
 }
+
 table tbody tr {
-	background-color: #f9fafb;
+	background-color: $accent-color;
 }
+
 table tbody tr:nth-child(odd) {
-	background-color: #ffffff;
+	background-color: lighten($accent-color, 10%);
 }
 
 .col-creditor {
