@@ -1,10 +1,10 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InternalPayment } from '../../model/internal/InternalPayment';
 import { PaymentService } from '../../services/payments.service';
 import { Store } from '@ngrx/store';
-import { selectedPaymentContextSelector } from '../../state/selector/app.selector';
-import { catchError, EMPTY, filter, switchMap, take, tap } from 'rxjs';
+import { paymentContextsSelector, selectedPaymentContextSelector } from '../../state/selector/app.selector';
+import { catchError, combineLatest, EMPTY, filter, map, Observable, switchMap, take, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './payments-table.component.html',
   styleUrl: './payments-table.component.scss'
 })
-export class PaymentsTableComponent {
+export class PaymentsTableComponent implements OnInit {
   @Input()
   payments: InternalPayment[] | null = [];
 
@@ -25,6 +25,10 @@ export class PaymentsTableComponent {
   @Output()
   public update: EventEmitter<void> = new EventEmitter<void>();
 
+  protected selectedPaymentContextSelector$!: Observable<number | undefined>;
+
+  protected selectedPaymentContextSelectorIsClosed$! : Observable<boolean | undefined>;
+
   constructor(
     private paymentService: PaymentService,
     private store: Store,
@@ -32,9 +36,22 @@ export class PaymentsTableComponent {
     private router: Router
   ){}
 
+  ngOnInit(): void {
+    this.selectedPaymentContextSelector$ = this.store.select(selectedPaymentContextSelector).pipe(
+      filter(selectedPaymentContextSelector => selectedPaymentContextSelector != null)
+    );
+
+    this.selectedPaymentContextSelectorIsClosed$ = combineLatest([
+      this.store.select(paymentContextsSelector),
+      this.selectedPaymentContextSelector$ 
+    ]).pipe(
+      map(([paymentContexts, selectedPaymentContext]) => paymentContexts.find(ctx => ctx.id == selectedPaymentContext)?.isClosed),
+      filter(selectedPaymentContextIsClosed => selectedPaymentContextIsClosed != null)
+    );
+  }
+
   deletePayment(paymentId: number): void {
-    this.store.select(selectedPaymentContextSelector).pipe(
-      filter(selectedPaymentContextSelector => selectedPaymentContextSelector != null),
+    this.selectedPaymentContextSelector$.pipe(
       take(1),
       switchMap(selectedPaymentContextSelector => 
         this.paymentService.deletePaymentById(selectedPaymentContextSelector!, paymentId).pipe(

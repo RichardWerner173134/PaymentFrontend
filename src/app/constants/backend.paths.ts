@@ -1,6 +1,4 @@
-import { HttpParams } from "@angular/common/http";
-
-export const url: string = "http://localhost:7066/api";
+export const url: string = "https://rw-payment-backend.azurewebsites.net/api";
 
 // users
 export const pathUsers: string = url + "/users";
@@ -59,4 +57,4 @@ export const pathBillOverviewsForUser = (selectedPaymentContext: number, usernam
 }
 
 // hostkey
-export const hostKey: string = "xoHPlrmwL7fFNhlIV6LqiW8Zh1vEBAseHHCnvhk9RgXvAzFu5uu2Tw==";
+export const hostKey: string = "";

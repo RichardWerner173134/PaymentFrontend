@@ -19,7 +19,12 @@
                 <td>{{ payment.debitors.join(", ") }}</td>
                 <td>{{ payment.author }}</td>
                 <td *ngIf="withDelete">
-                    <input type="button" value="Löschen" (click)="deletePayment(payment.paymentId)" class="btn"/>
+                    <input 
+                        type="button" 
+                        value="Löschen" 
+                        (click)="deletePayment(payment.paymentId)" 
+                        class="btn" 
+                        [disabled]="(selectedPaymentContextSelectorIsClosed$ | async) ?? true"/>
                 </td>
             </tr>
         </tbody>

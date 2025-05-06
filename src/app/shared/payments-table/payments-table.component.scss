@@ -69,7 +69,11 @@ table tbody tr:nth-child(odd) {
     transition: background-color 0.3s ease;
 }
 
-.btn:hover {
+.btn:not(:disabled):hover {
     height: 35px;
     background-color:$primary-button-color-hover;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
 }
