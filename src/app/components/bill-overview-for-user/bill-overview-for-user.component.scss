@@ -1,59 +1,59 @@
-@use '../../styles/_colors.scss' as *;
+@use "../../styles/_colors.scss" as *;
 
 .filter-bills-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
 }
 
 .filter-bills-form-section {
-    padding: 10px;
-    width: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  padding: 10px;
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
 }
 
 .btn {
-    padding: 0.6rem 1.2rem;
-    background-color: $primary-button-color;
-    color: $primary-background-color;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 0.6rem 1.2rem;
+  background-color: $primary-button-color;
+  color: $primary-background-color;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-    background-color: $primary-button-color-hover;
+  background-color: $primary-button-color-hover;
 }
 
 .filter-bills-form-section-item {
-    width: 20%;
-    margin-left: 10px;
-    margin-right: 10px;
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .search-bar {
-    height: 30px;
-    border-radius: 5px;
-    padding: 5px;
-    border: 1px solid $border-color;
-    background-color: $primary-background-color;
-    color: $text-color;
+  height: 30px;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid $border-color;
+  background-color: $primary-background-color;
+  color: $text-color;
 }
 
 .bill-for-user {
-    border: 1px solid $border-color;
-    margin: 15px;
-    padding: 15px;
-    background-color: $primary-background-color;
-    border-radius: 5px;
+  border: 1px solid $border-color;
+  margin: 15px;
+  padding: 15px;
+  background-color: $primary-background-color;
+  border-radius: 5px;
 }
 
 .col-creditor,
@@ -62,9 +62,32 @@
 .col-description,
 .col-debitors,
 .col-author {
-    width: 200px;
+  width: 200px;
 }
 
 .bill-composite-container {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .filter-bills-form-section {
+    flex-direction: row;
+    justify-content: flex-start;
     width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .filter-bills-form-section-item {
+    width: auto;
+    margin: 5px;
+  }
+
+  .search-bar {
+    width: 45%;
+  }
+
+  .btn {
+    width: 30%;
+  }
 }

@@ -1,48 +1,70 @@
 <div class="bills-container">
-    <datalist id="suggestions">
-        <option *ngFor="let user of users$ | async" [value]="user.username">
-    </datalist>
-    
-    <form class="filter-bills-form" [formGroup]="billsForm" (ngSubmit)="onSubmit()">
+  <datalist id="suggestions">
+    <option
+      *ngFor="let user of users$ | async"
+      [value]="user.username"
+    ></option>
+  </datalist>
 
-        <div class="filter-bills-form-section">
-            <input formControlName="username" class="search-bar filter-bills-form-section-item" type="text" placeholder="Nutzername" list="suggestions">
-            
-            <button class="btn filter-bills-form-section-item" type="submit">Suchen</button>
-            <button class="btn filter-bills-form-section-item" type="button" (click)="reset()">Zurücksetzen</button>
-        </div>
-    </form>
-    
-    <div *ngFor="let bill of bills$ | async" class="bill-for-user">
-        <p>Gläubiger: {{ bill.issuedBy }}</p>
-        <p>Schuldner: {{ bill.issuedFor }}</p>
-        <p>Betrag: {{ bill.amount }}€</p>
+  <form
+    class="filter-bills-form"
+    [formGroup]="billsForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="filter-bills-form-section">
+      <input
+        formControlName="username"
+        class="search-bar filter-bills-form-section-item"
+        type="text"
+        placeholder="Nutzername"
+        list="suggestions"
+      />
 
-        <div class="bill-composite-container">
-            <table>
-                <thead>
-                    <tr>
-                        <td class="col-bill-part">Anteil</td>
-                        <td class="col-creditor">Gläubiger</td>
-                        <td class="col-price">Gesamtpreis</td>
-                        <td class="col-paymentdate">Datum der Rechnung</td>
-                        <td class="col-description">Beschreibung</td>
-                        <td class="col-debitors">Schuldner</td>
-                        <td class="col-author">Verfasser</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let composite of bill.billComposites;">
-                        <td>{{ composite.amount }}€</td>
-                        <td>{{ composite.payment.creditor }}</td>
-                        <td>{{ composite.payment.price }}€</td>
-                        <td>{{ composite.payment.paymentDate }}</td>
-                        <td>{{ composite.payment.paymentDescription }}</td>
-                        <td>{{ composite.payment.debitors.join(", ") }}</td>
-                        <td>{{ composite.payment.author }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <button class="btn filter-bills-form-section-item" type="submit">
+        Suchen
+      </button>
+      <button
+        class="btn filter-bills-form-section-item"
+        type="button"
+        (click)="reset()"
+      >
+        Zurücksetzen
+      </button>
     </div>
+  </form>
+
+  <div *ngFor="let bill of bills$ | async" class="bill-for-user">
+    <div class="bill-content">
+      <p>Gläubiger: {{ bill.issuedBy }}</p>
+      <p>Schuldner: {{ bill.issuedFor }}</p>
+      <p>Betrag: {{ bill.amount }}€</p>
+
+      <div class="bill-composite-container">
+        <table>
+          <thead>
+            <tr>
+              <td class="col-bill-part">Anteil</td>
+              <td class="col-creditor">Gläubiger</td>
+              <td class="col-price">Gesamtpreis</td>
+              <td class="col-paymentdate">Datum der Rechnung</td>
+              <td class="col-description">Beschreibung</td>
+              <td class="col-debitors">Schuldner</td>
+              <td class="col-author">Verfasser</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let composite of bill.billComposites">
+              <td>{{ composite.amount }}€</td>
+              <td>{{ composite.payment.creditor }}</td>
+              <td>{{ composite.payment.price }}€</td>
+              <td>{{ composite.payment.paymentDate }}</td>
+              <td>{{ composite.payment.paymentDescription }}</td>
+              <td>{{ composite.payment.debitors.join(", ") }}</td>
+              <td>{{ composite.payment.author }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

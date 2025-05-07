@@ -40,3 +40,22 @@ li a:hover {
     background-color: $primary-background-color;
     color: $text-color;
 }
+
+@media (max-width: 768px) {
+    ul {
+      font-size: 12px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    li {
+      padding: 8px 12px;
+      width: auto;
+    }
+  
+    li a {
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+}

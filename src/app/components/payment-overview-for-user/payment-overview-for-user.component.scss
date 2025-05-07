@@ -1,22 +1,20 @@
-@use '../../styles/colors' as *;
+@use "../../styles/colors" as *;
 
 .filter-payments-form {
-    display: flex;
-    flex-direction: column;
-
-    margin-top: 50px;
-    margin-bottom: 50px;
-
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
 }
 
 .filter-payments-form-section {
-    padding: 10px;
-    width: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 input[type="text"],
@@ -37,65 +35,74 @@ input[type="number"]:focus {
   background-color: $primary-background-color;
 }
 
-
 .btn {
-    padding: 0.6rem 1.2rem;
-    background-color: $primary-button-color;
-    color: $primary-background-color;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 0.6rem 1.2rem;
+  background-color: $primary-button-color;
+  color: $primary-background-color;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-    background-color: $primary-button-color-hover;
+  background-color: $primary-button-color-hover;
 }
 
 .filter-payments-form-section-item {
-    width: 20%;
-    margin-left: 10px;
-    margin-right: 10px;
+  width: 23%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .search-bar {
-    height: 30px;
+  height: 30px;
 }
 
 .usertype-selection {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid $border-color;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    background-color: $primary-background-color;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: $primary-background-color;
 }
 
-.col-creditor {
-    width: 200px;    
-}
-
-.col-price {
-    width: 200px;    
-}
-
-.col-paymentdate {
-    width: 200px;    
-}
-
-.col-description {
-    width: 200px;    
-}
-
-.col-debitors {
-    width: 200px;    
-}
-
+.col-creditor,
+.col-price,
+.col-paymentdate,
+.col-description,
+.col-debitors,
 .col-author {
-    width: 200px;    
+  width: 200px;
 }
 
-.payments-container {
+.payments-for-user-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .filter-payments-form-section {
+    flex-wrap: nowrap;
+  }
+
+  .filter-payments-form-section-item {
+    width: 24%;
+  }
+
+  .search-bar,
+  .usertype-selection,
+  .btn {
     width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .payments-for-user-container {
+    padding: 0 0.5rem;
+  }
 }

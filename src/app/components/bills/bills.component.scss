@@ -1,116 +1,155 @@
-@use '../../styles/_colors.scss' as *; // Importiere die Farbvariablen
+@use "../../styles/_colors.scss" as *; // Importiere die Farbvariablen
+
+.bills-container {
+  width: 100%;
+  padding: 0 0.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
 
 .filter-bills-form {
-    display: flex;
-    flex-direction: column;
-
-    margin-top: 50px;
-    margin-bottom: 50px;
-
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
 }
 
 .filter-bills-form-section {
-    padding: 10px;
-    width: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .btn {
-    padding: 0.6rem 1.2rem;
-    background-color: $primary-button-color;
-    color: $primary-background-color;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 0.6rem 1.2rem;
+  background-color: $primary-button-color;
+  color: $primary-background-color;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-    background-color: $primary-button-color-hover;
+  background-color: $primary-button-color-hover;
 }
 
 .filter-bills-form-section-item {
-    width: 20%;
-    margin-left: 10px;
-    margin-right: 10px;
+  width: 20%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .search-bar {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid $border-color;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    background-color: $primary-background-color;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: $primary-background-color;
 }
 
 .bill-for-user {
-    border: 1px solid $border-color;
-    margin: 15px;
-    padding: 15px;
-    background-color: $primary-background-color;
-    border-radius: 5px;
+  border: 1px solid $border-color;
+  margin: 15px;
+  padding: 15px;
+  background-color: $primary-background-color;
+  border-radius: 5px;
 }
 
 table {
-	border-collapse: collapse;
-    font-family: Tahoma, Geneva, sans-serif;
+  border-collapse: collapse;
+  font-family: Tahoma, Geneva, sans-serif;
+  width: 100%;
+  max-width: 1000px;
 }
 
 table td {
-	padding: 15px;
+  padding: 15px;
 }
 
 table thead td {
-    background-color: $primary-color;
-	color: $text-color;
-	font-weight: bold;
-	font-size: 13px;
-	border: 1px solid $border-color;
+  background-color: $primary-color;
+  color: $text-color;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid $border-color;
 }
 
 table tbody td {
-	color: #636363;
-	border: 1px solid $primary-background-color;
+  color: #636363;
+  border: 1px solid $primary-background-color;
 }
 
 table tbody tr {
-	background-color: $accent-color;
+  background-color: $accent-color;
 }
 
 table tbody tr:nth-child(odd) {
-	background-color: lighten($accent-color, 10%);
+  background-color: lighten($accent-color, 10%);
 }
 
 .col-creditor {
-    width: 200px;    
+  width: 200px;
 }
 
 .col-price {
-    width: 200px;    
+  width: 200px;
 }
 
 .col-paymentdate {
-    width: 200px;    
+  width: 200px;
 }
 
 .col-description {
-    width: 200px;    
+  width: 200px;
 }
 
 .col-debitors {
-    width: 200px;    
+  width: 200px;
 }
 
 .col-author {
-    width: 200px;    
+  width: 200px;
 }
 
 .bill-composite-container {
+  width: 100%;
+  max-width: 1000px;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .filter-bills-form-section {
+    flex-wrap: nowrap;
+    justify-content: space-between;
     width: 100%;
+  }
+
+  .filter-bills-form-section-item {
+    flex: 1 1 33%;
+    margin: 0 4px;
+  }
+
+  .search-bar {
+    padding: 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 0.4rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .bills-container {
+    padding: 0 0.5rem;
+  }
 }

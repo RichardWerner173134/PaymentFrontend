@@ -1,32 +1,35 @@
 <div class="payments-container">
-    <table>
-        <thead>
-            <tr>
-                <td class="col-creditor">Glälubiger</td>
-                <td class="col-price">Gesamtpreis</td>
-                <td class="col-paymentdate">Datum der Rechnung</td>
-                <td class="col-description">Beschreibung</td>
-                <td class="col-debitors">Schuldner</td>
-                <td class="col-author">Verfasser</td>
-            </tr>
-        </thead>
-        <tbody *ngIf="payments != null">
-            <tr *ngFor="let payment of payments">
-                <td>{{ payment.creditor }}</td>
-                <td>{{ payment.price }}€</td>
-                <td>{{ payment.paymentDate }}</td>
-                <td>{{ payment.paymentDescription }}</td>
-                <td>{{ payment.debitors.join(", ") }}</td>
-                <td>{{ payment.author }}</td>
-                <td *ngIf="withDelete">
-                    <input 
-                        type="button" 
-                        value="Löschen" 
-                        (click)="deletePayment(payment.paymentId)" 
-                        class="btn" 
-                        [disabled]="(selectedPaymentContextSelectorIsClosed$ | async) ?? true"/>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <td class="col-creditor">Gläubiger</td>
+        <td class="col-price">Gesamtpreis</td>
+        <td class="col-paymentdate">Datum der Rechnung</td>
+        <td class="col-description">Beschreibung</td>
+        <td class="col-debitors">Schuldner</td>
+        <td class="col-author">Verfasser</td>
+      </tr>
+    </thead>
+    <tbody *ngIf="payments != null">
+      <tr *ngFor="let payment of payments">
+        <td>{{ payment.creditor }}</td>
+        <td>{{ payment.price }}€</td>
+        <td>{{ payment.paymentDate }}</td>
+        <td>{{ payment.paymentDescription }}</td>
+        <td>{{ payment.debitors.join(", ") }}</td>
+        <td>{{ payment.author }}</td>
+        <td *ngIf="withDelete">
+          <input
+            type="button"
+            value="Löschen"
+            (click)="deletePayment(payment.paymentId)"
+            class="btn"
+            [disabled]="
+              (selectedPaymentContextSelectorIsClosed$ | async) ?? true
+            "
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
