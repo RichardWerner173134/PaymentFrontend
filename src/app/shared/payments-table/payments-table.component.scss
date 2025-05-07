@@ -88,30 +88,3 @@ table tbody tr:nth-child(odd) {
     height: 40px;
   }
 }
-
-@media screen and (max-width: 480px) {
-  table {
-    font-size: 12px;
-  }
-
-  .payments-container {
-    overflow-x: scroll;
-  }
-
-  .col-creditor,
-  .col-price,
-  .col-paymentdate,
-  .col-description,
-  .col-debitors,
-  .col-author {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 8px;
-  }
-
-  .btn {
-    height: 40px;
-    width: 100%;
-  }
-}
