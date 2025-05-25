@@ -1,9 +1,29 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit,  } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { PostPaymentRequest, User } from '../../model/backend/InternalSwagger';
 import { CommonModule, NgFor } from '@angular/common';
-import { catchError, EMPTY, filter, Observable, switchMap, take, tap } from 'rxjs';
+import {
+  catchError,
+  EMPTY,
+  filter,
+  Observable,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { __param } from 'tslib';
 import { PaymentService } from '../../services/payments.service';
@@ -17,7 +37,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   imports: [ReactiveFormsModule, RouterModule, NgFor, CommonModule],
   templateUrl: './new-payment.component.html',
   styleUrl: './new-payment.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPaymentComponent implements OnInit {
   users$: Observable<User[]> = this.userService.getCachedUsers();
@@ -27,12 +47,12 @@ export class NewPaymentComponent implements OnInit {
     creditor: '',
     description: '',
     paymentDate: [new Date(), Validators.required],
-    price: 1.00,
+    price: 1.0,
     debitors: this.formBuilder.array([
       this.formBuilder.group({
-        debitor: ""
-      })
-    ])
+        debitor: '',
+      }),
+    ]),
   });
 
   debitorControls: AbstractControl[] = [];
@@ -50,17 +70,19 @@ export class NewPaymentComponent implements OnInit {
   ngOnInit(): void {
     this.debitorControls = this.debitors.controls;
 
-    this.paymentForm.valueChanges.pipe(
-      tap(() => {
-        this.cdr.markForCheck();
-      })
-    ).subscribe();
+    this.paymentForm.valueChanges
+      .pipe(
+        tap(() => {
+          this.cdr.markForCheck();
+        })
+      )
+      .subscribe();
   }
 
   addDebitor() {
     this.debitors.push(this.formBuilder.group({ debitor: '' }));
     this.debitorControls = this.debitors.controls;
-    this.cdr.markForCheck(); 
+    this.cdr.markForCheck();
   }
 
   removeDebitor(index: number) {
@@ -72,43 +94,56 @@ export class NewPaymentComponent implements OnInit {
   }
 
   get debitors() {
-    return this.paymentForm.controls["debitors"] as FormArray;
+    return this.paymentForm.controls['debitors'] as FormArray;
   }
 
-  onSubmit(){
+  onSubmit() {
     let body: PostPaymentRequest = {
       payment: {
         author: this.paymentForm.value.author,
         creditor: this.paymentForm.value.creditor,
         debitors: this.mapDebitors(this.paymentForm.value.debitors),
-        paymentDate: this.paymentForm.value.paymentDate,
+        paymentDate: new Date(this.paymentForm.value.paymentDate),
         paymentDescription: this.paymentForm.value.description,
-        price: this.paymentForm.value.price
-      }
-    }
+        price: Number(this.paymentForm.value.price),
+      },
+    };
 
-    this.store.select(selectedPaymentContextSelector).pipe(
-      filter(selectedPaymentContext => selectedPaymentContext != null),
-      take(1),
-      switchMap(selectedPaymentContext =>
-        this.paymentService.postPayment(selectedPaymentContext!, JSON.stringify(body)).pipe(
-          switchMap(() => this.snackbarService.open("Rechnung erfolgreich erstellt", "Ok", { duration: 0 }).onAction()),
-          tap(() => {
-            this.router.navigateByUrl("/payments");
-          }),
-          catchError(error => {
-            console.log(error);
-            this.snackbarService.open("Rechnung konnte nicht erstellt werden", "Schließen", { duration: 3000 });
-            return EMPTY;
-          })
+    this.store
+      .select(selectedPaymentContextSelector)
+      .pipe(
+        filter((selectedPaymentContext) => selectedPaymentContext != null),
+        take(1),
+        switchMap((selectedPaymentContext) =>
+          this.paymentService
+            .postPayment(selectedPaymentContext!, JSON.stringify(body))
+            .pipe(
+              switchMap(() =>
+                this.snackbarService
+                  .open('Rechnung erfolgreich erstellt', 'Ok', { duration: 0 })
+                  .onAction()
+              ),
+              tap(() => {
+                this.router.navigateByUrl('/payments');
+              }),
+              catchError((error) => {
+                console.log(error);
+                this.snackbarService.open(
+                  'Rechnung konnte nicht erstellt werden',
+                  'Schließen',
+                  { duration: 3000 }
+                );
+                return EMPTY;
+              })
+            )
         )
       )
-    ).subscribe();
+      .subscribe();
   }
 
   mapDebitors(arg: any[]): string[] {
     let result: string[] = [];
-    arg.forEach(element => {
+    arg.forEach((element) => {
       result.push(element.debitor);
     });
 
